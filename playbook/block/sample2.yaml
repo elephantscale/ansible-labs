@@ -1,0 +1,44 @@
+
+---
+
+- hosts: webservers
+  name: Update timezone
+  gather_facts: no
+
+  vars:
+    vA: true
+
+  tasks:
+
+    - name: Block A
+      become: yes
+      become_user: root
+      ignore_errors: yes
+      when: vA
+      block:
+
+        - name: print_a
+          debug:
+            msg: "This task will be executed A"
+
+        - name: print_b
+          debug:
+            msg: "This task will be executed B"
+
+        - name: failing_task
+          shell: /bin/hello/john/may
+
+      rescue:
+        - name: print_d
+          debug:
+            msg: "This task will not be executed d"
+
+      always:
+
+        - name: print_c
+          debug:
+            msg: "This task will not be executed C"
+
+    - name : normal_task
+      debug:
+        msg: "Print something"
