@@ -28,7 +28,7 @@ $ ansible --version
 You should get the following response:
 
 ```console
-ansible 2.9.6
+ansible 2.12.7
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
