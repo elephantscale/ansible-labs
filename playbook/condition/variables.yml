@@ -8,12 +8,18 @@
   vars:
     epic: true
     monumental: "yes"
+    distro: "Ubuntu"
 
   tasks:
     - name: Run the command if "epic" or "monumental" is true
       debug:
         msg: echo "This certainly is epic!"
       when: epic or monumental | bool
+
+    - name: Run the command if "distro" is ubuntu
+      debug:
+        msg: echo "This certainly is epic!"
+      when: distro == "Ubuntu"
 
     - name: Run the command if "epic" is false
       debug:
