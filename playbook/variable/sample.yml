@@ -5,6 +5,24 @@
   become_user: root
   gather_facts: no
 
+  vars_prompt:
+
+    - name: username
+      prompt: Enter username:
+      default: admin
+      validate:
+        - regexp: ^[a-zA-Z0-9]+$
+        - message: "Username must be alphanumeric"
+        - required: yes
+
+    - name: password
+      prompt: Enter the password for %u:
+      default: password
+      private: true
+      validate:
+        - regexp: .{8,}
+        - message: "Password must be at least 8 characters long"
+      required: true
 
   vars:
     pkgname: nginx

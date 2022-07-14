@@ -1,15 +1,12 @@
 ---
 
 - hosts: webservers
-  become: yes
-  become_user: root
-  gather_facts: yes
-
+  gather_facts: no
 
   tasks:
 
     - name: Register a variable
-      ansible.builtin.shell: cat /home/ubuntu/a.txt
+      shell: cat /home/ubuntu/a.txt
       register: motd_contents
 
     - name: print the variable
@@ -19,8 +16,6 @@
     - name: print the variable
       debug:
         msg: "{{ motd_contents.stdout.find('hi') }}"
-
-
 
     - name: Use the variable in conditional statement
       debug:

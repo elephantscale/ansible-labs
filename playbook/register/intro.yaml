@@ -1,0 +1,39 @@
+---
+- hosts: webservers
+  gather_facts: no
+  become: yes
+  become_user: root
+  name: Update the server
+
+  tasks:
+
+    - name: install apache webserver
+      apt:
+        name: gedit
+        state: present
+        #update_cache: yes
+      register: installResult
+
+    - name: Print Install Result
+      debug:
+        var: installResult
+
+
+- hosts: webservers
+  gather_facts: no
+  become: yes
+  become_user: root
+  name: Server ping
+
+
+  tasks:
+
+    - name: Ping the hosts
+      ping:
+      register: pingResult
+
+
+    - name: print the result
+      debug:
+        #msg: "{{ pingResult }}"
+        var: pingResult

@@ -1,0 +1,7 @@
+---
+
+- hosts: webservers
+  name: Update timezone
+  gather_facts: no
+
+
