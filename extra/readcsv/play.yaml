@@ -1,0 +1,30 @@
+---
+
+- hosts: webserver
+  gather_facts: no
+
+  tasks:
+
+    #- name: "Send users.csv"
+    #  copy:
+    #    src: users.csv
+    #    dest: ~/users.csv
+
+    - name: "Read user info from csv"
+      delegate_to: localhost
+      read_csv:
+        path: users.csv
+        skipinitialspace: yes
+      register: users
+
+
+
+    - name: Print info
+      debug:
+        msg: "Hello {{ userInfo.title }}.{{ userInfo.first_name }} {{ userInfo.last_name }} your email address is: {{ userInfo.email }}"
+      loop: "{{ users.list }}"
+      loop_control:
+        loop_var: userInfo
+
+
+
