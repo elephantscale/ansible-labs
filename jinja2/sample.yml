@@ -1,18 +1,26 @@
 ---
 
-- hosts: webserver
+- hosts: webservers
 
+  vars_prompt:
+
+    - name: userCount
+      prompt: How many users
+      private: no
 
   vars:
-    var_first_line: Hello
-    var_second_line: Goodbye
-    names: ['John','Jane','Sarah','Tim']
 
+    dbUsername: root
+    dbPassword: mySecurePassword
+    names:
+      - John
+      - Jane
+      - Sarah
+      - Tim
 
   tasks:
-    - name: Ansible Jinja2 Template
+
+    - name: Send Config to servers
       template:
-        src: hello_world.jn2
-        dest: ~/hello_r.txt
-
-
+        src: config.ini.jn2
+        dest: ~/config.ini

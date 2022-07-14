@@ -1,17 +1,11 @@
-{{ var_first_line }}
-lorem ipsum dolor sit amet, consectetur
+db_username = {{  dbUsername }}
+db_pass = {{ dbPassword }}
+hostname= {{ ansible_hostname }}
 
-{% for i in range(2) %}
-This is a loop, and i'm the {{ i }}th iteration
-{% endfor %}
+{% for i in range(userCount|int)  %}
+user_{{ i }}_username = admin
+{% endfor  %}
 
 {% for item in names %}
-{{ var_first_line }}, {{item}}
+name = {{ item }}
 {% endfor %}
-
-
-
-
-{{ var_second_line }}
-
-
