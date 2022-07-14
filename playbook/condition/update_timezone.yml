@@ -1,29 +1,34 @@
 ---
 
 - hosts: webservers
-  become: yes
-  become_user: root
-  gather_facts: yes
+  gather_facts: no
 
   vars:
-    timezone: Europe/UTC
+    new_timezone: "Europe/Berlin"
 
   tasks:
 
-    - name: Register a variable
+    - name: Access timezone and register its value
       shell: cat /etc/timezone
-      register: get_timezone
+      register: remote_timezone
 
-    - name: print the variable
-      debug:
-        msg: "{{ get_timezone.stdout }}"
+    - debug:
+        msg: "{{ remote_timezone.stdout }}"
 
-    - name: set /etc/timezone
-      shell: echo "{{ timezone }}" > /etc/timezone
-      when: get_timezone.stdout.find('{{timezone}}') == -1
-      notify: update tzdata
+    - name: update timezone
+      shell: echo "{{ new_timezone }}" > /etc/timezone
+      become: yes
+      become_user: root
+      when: remote_timezone.stdout !=  new_timezone
+      notify:
+        - succ_msg
+        - succ_msg_b
 
   handlers:
-    - name: update tzdata
-      debug:
-        msg: "Timezone has been Updated to {{ timezone }}"
+
+    - name: succ_msg
+      debug: msg="Timezone has been updated to {{ new_timezone }}"
+
+    - name: succ_msg_b
+      debug: msg="Timezone has been updated to {{ new_timezone }} Finish"
+
