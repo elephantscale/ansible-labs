@@ -50,6 +50,8 @@ In the labs term `C&C` means `Control Center`
 ### Extra
 
 * [Log per Host](extra/log_per_host/README.md)
+* [Fact Caching](extra/fact_cache/README.md)
+
 
 
 ### Sample
