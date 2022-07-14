@@ -1,0 +1,12 @@
+---
+
+- hosts: webservers
+
+  tasks:
+
+    - name: Load variables
+      include_vars: vars.yaml
+
+    - debug: msg="Hello, {{ username }}"
+
+    - debug: msg="Password is {{ password }}"
