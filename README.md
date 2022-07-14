@@ -47,7 +47,9 @@ In the labs term `C&C` means `Control Center`
 * __Sample__: [Apache2](playbook/apache2)
 * __Sample__: [LAMP](playbook/lamp/sample.yml)
 
+### Extra
 
+* [Log per Host](extra/log_per_host/README.md)
 
 
 ### Sample
