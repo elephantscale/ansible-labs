@@ -1,0 +1,13 @@
+<html>
+<body>
+
+<h1> Hello, {{userEmailInfo.title}}.{{userEmailInfo.first_name}} {{userEmailInfo.last_name}}</h1>
+
+
+<h2>  This is HTML formatted Report from Ansible </h2>
+<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/1664px-Ansible_logo.svg.png" width="200" alt="ansible logo">
+<p>   Created by <strong>{{ lookup('env','USER') }}</strong>  at {{  ansible_date_time.iso8601 }}   </p>
+
+</body>
+</html>

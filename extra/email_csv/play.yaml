@@ -1,0 +1,38 @@
+---
+
+- hosts: webservers
+  gather_facts: yes
+
+
+  tasks:
+
+    - include_vars: vars.yaml
+
+
+    - name: "Read user info from csv"
+      delegate_to: localhost
+      read_csv:
+        path: users.csv
+        skipinitialspace: yes
+      register: users
+
+    - name: Send an email using SMTP server    
+      loop: "{{ users.list }}"
+      loop_control:
+        loop_var: userEmailInfo
+      mail:
+        host: "{{ smtp_host }}"
+        port: 587
+        username: "{{ smtp_username }}"
+        password: "{{ smtp_password }}"
+        sender: postmaster@skilla.dev
+        to: "{{userEmailInfo.email}}"
+        subject: Ansible provision report
+        body: "{{  lookup('template','templates/mail_body.html.j2')  }}"
+        subtype: html
+
+
+
+        
+
+
