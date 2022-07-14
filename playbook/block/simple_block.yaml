@@ -1,0 +1,32 @@
+---
+
+- hosts: webserver
+  gather_facts: no
+
+  tasks:
+
+
+    - name: Block A
+      ignore_errors: yes
+      block:
+
+        - name: Print Message A
+          debug: msg="Hello A"
+
+        - name: Print Message B
+          debug: msg="Hello B"
+
+        - name: Forcing a failure
+          shell: /bin/false
+
+        - name: Print Message C
+          debug: msg="Hello C"
+
+        - name: Print Message D
+          debug: msg="Hello D"
+
+
+
+
+
+
