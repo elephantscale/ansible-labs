@@ -1,0 +1,10 @@
+---
+
+- hosts: webservers
+
+
+  tasks:
+
+    - name: print fact from another play
+      debug:
+        var: fact_one

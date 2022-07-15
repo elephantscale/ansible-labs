@@ -1,0 +1,25 @@
+---
+
+- hosts: webservers
+
+  tasks:
+
+    - name: get value
+      shell: cat /etc/motd
+      register: remote_motd
+
+    - debug:
+        var: remote_motd
+
+     
+    - name: Setting host facts using set_fact module
+      set_fact:
+        fact_one: "Hello"
+        fact_other: "Bye"
+        john_fact: "Doe"
+        cacheable: yes
+
+    - name: Print all facts
+      debug: 
+        var: john_fact
+

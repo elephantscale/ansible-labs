@@ -1,0 +1,23 @@
+---
+
+- name: Play to kill python on test machines
+  hosts: studentsRemote
+  become: yes
+  become_user: root
+  gather_facts: no
+
+
+  tasks:
+
+    - name: Block to Kill
+      ignore_errors: yes
+      block:
+
+        - name: Kill Python Process
+          shell: pkill python
+      
+      always:
+
+        - debug: msg="DONE!"
+      
+      
