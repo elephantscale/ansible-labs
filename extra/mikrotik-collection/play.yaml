@@ -1,0 +1,28 @@
+---
+
+- name: mikrotik play
+  hosts: routers
+
+  gather_facts: no
+
+
+  collections:
+
+    - community.routeros
+
+  tasks:
+
+    - name: get resource
+      community.routeros.command:
+        commands:
+          - "/system resource print"
+      register: syste_r_var
+
+    - debug:
+        msg: "{{ syste_r_var.stdout | regex_search('[0-9]') }}" 
+
+    - name: get facts
+      community.routeros.facts:
+    
+      
+

@@ -1,0 +1,10 @@
+[routers]
+
+107.20.28.173 ansible_host=107.20.28.173
+
+[routers:vars]
+ansible_connection=ansible.netcommon.network_cli
+ansible_network_os=community.routeros.routeros
+ansible_user=ansible
+ansible_ssh_pass=t1
+

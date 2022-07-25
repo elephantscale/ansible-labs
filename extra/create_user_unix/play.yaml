@@ -1,0 +1,46 @@
+---
+
+- hosts: webservers
+  gather_facts: no
+  become: yes
+  become_user: root
+
+  tasks:
+
+    - name: Print a list
+      with_items:
+        - John
+        - Jane
+        - Sarah
+      debug:
+        msg: "{{ item }}"
+
+    - name: Print using loop
+      debug:
+        msg: "Hello, {{ item.name }} Password: {{ item.pass }}"
+      loop:
+        - name: john
+          pass: 123
+
+        - name: sarah
+          pass: 345
+
+        - name: jane
+          pass: 789
+
+    - name: Print using loop
+      user:
+        name: "{{ item.name }}"
+        password: "{{ item.pass }}"
+        state: absent
+      loop:
+        - name: john
+          pass: 123
+
+        - name: sarah
+          pass: 345
+
+        - name: jane
+          pass: 789
+
+
