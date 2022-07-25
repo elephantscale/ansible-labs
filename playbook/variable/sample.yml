@@ -15,7 +15,6 @@
       prompt: Enter the password for %u:
       default: password
       private: true
-      required: true
 
   vars:
     pkgname: nginx
