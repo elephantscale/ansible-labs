@@ -2,10 +2,7 @@
 
 - name: Our First Play
   hosts: webservers
-
-
-
-
+  gather_facts: no
 
 
   tasks:
