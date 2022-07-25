@@ -1,27 +1,40 @@
 ---
 
-- hosts: webservers
-  become: yes
-  become_user: root
-  gather_facts: yes
+- name: Conditional play
+  gather_facts: no 
+  hosts: webservers
+
+  vars_prompt:
+
+    - name: question
+      prompt: enter a value (yes/no)
+      private: no
+      default: yes
+
 
   vars:
-    epic: true
-    monumental: "yes"
+    epic: true   #false or true
+
+    #question: "yes"  # 0 = no = fasle  | 1 = yes = true   
+
     distro: "Ubuntu"
 
   tasks:
-    - name: Run the command if "epic" or "monumental" is true
-      debug:
-        msg: echo "This certainly is epic!"
-      when: epic or monumental | bool
 
-    - name: Run the command if "distro" is ubuntu
-      debug:
-        msg: echo "This certainly is epic!"
-      when: distro == "Ubuntu"
+    - name: "Print if epic is true"
+      when: 
+        - question | bool  
+        - distro == "Ubuntu"
 
-    - name: Run the command if "epic" is false
+      debug: 
+        msg: "Task 1"
+
+    - name: "print if epic is false"
+      when: not question | bool  or epic
       debug:
-        msg: echo "This certainly isn't epic!"
-      when: not epic
+        msg: "Task 2"
+      
+
+
+
+
