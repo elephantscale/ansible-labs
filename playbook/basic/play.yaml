@@ -1,0 +1,14 @@
+---
+
+- name: Our First Play
+  hosts: webservers
+
+
+
+
+
+
+  tasks:
+    - name: Print something
+      debug:
+        msg: "Hello World"
