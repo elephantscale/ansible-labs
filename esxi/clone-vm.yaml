@@ -1,0 +1,5 @@
+- name: clone vm
+  community.vmware.vmware_guest_instant_clone:
+    datacenter: us1
+    datastore: ds-1
+    host: host1

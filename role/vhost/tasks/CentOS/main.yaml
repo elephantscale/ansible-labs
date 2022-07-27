@@ -1,0 +1,33 @@
+---
+
+- name: fix centos 6 repo file
+  copy:
+    src: files/CentOS-Base.repo
+    dest: /etc/yum.repos.d/CentOS-Base.repo
+  when: ansible_distribution_major_version == "6"
+
+
+- name: install apache service
+  yum:
+    name: httpd
+    state: latest
+    update_cache: yes
+
+- name: start and enable apache service
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+#- name: remove default config file
+#  file:
+#    dest: /etc/httpd/sites-enabled/000-default.conf
+#    state: absent
+
+- name: install vhost config file
+  template:
+    src: templates/vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644

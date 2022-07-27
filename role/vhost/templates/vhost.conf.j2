@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    ServerName {{ ansible_fqdn_domain }}
+    ServerAdmin webmaster@{{ ansible_fqdn_domain }}
+    DocumentRoot /var/www/vhosts/{{ ansible_fqdn_domain }}/
+
+    #ErrorLog ${APACHE_LOG_DIR}/error.log
+    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

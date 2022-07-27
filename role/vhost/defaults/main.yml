@@ -1,0 +1,5 @@
+---
+# defaults file for vhost
+
+
+ansible_fqdn_domain: a25.skilla.dev

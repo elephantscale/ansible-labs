@@ -1,0 +1,24 @@
+---
+# tasks file for vhost
+
+
+- include_tasks: Ubuntu/main.yaml
+  when: ansible_distribution == "Ubuntu"
+
+- include_tasks: CentOS/main.yaml
+  when: ansible_distribution == "CentOS"
+
+
+
+- name: create vhost dir
+  file:
+    dest: "/var/www/vhosts/{{ ansible_fqdn_domain }}/"
+    state:  directory
+    recurse: yes
+
+- name: copy file to vhost
+  copy:
+    src: files/index.html
+    dest: "/var/www/vhosts/{{ ansible_fqdn_domain }}/"
+
+

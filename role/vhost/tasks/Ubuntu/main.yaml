@@ -1,0 +1,26 @@
+---
+
+- name: install apache service
+  apt:
+    name: apache2
+    state: latest
+    update_cache: yes
+
+- name: start and enable apache service
+  service:
+    name: apache2
+    state: started
+    enabled: true
+
+- name: remove default config file
+  file:
+    dest: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+
+- name: install vhost config file
+  template:
+    src: templates/vhost.conf.j2
+    dest: /etc/apache2/sites-enabled/vhost.conf
+    owner: root
+    group: root
+    mode: 0644

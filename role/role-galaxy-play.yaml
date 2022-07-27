@@ -1,0 +1,14 @@
+---
+
+- hosts: webservers
+  become: true
+  become_user: root
+
+  vars:
+    apache_listen_port: 80
+    servername: "a25.skilla.dev"
+    documentroot: "/var/www/vhosts/a25.skilla.dev"
+
+
+  roles:
+    - role: geerlingguy.apache
