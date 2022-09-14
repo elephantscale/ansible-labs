@@ -1,0 +1,29 @@
+---
+
+- name: Loop Play
+  hosts: webserver
+  gather_facts: no
+
+
+  tasks:
+
+    - name: Print Fname Lname
+      debug:
+        msg: "Hello, {{ item.fname }} {{ item.lname }}"
+      loop:
+        - { fname: John, lname: Doe }
+        - { fname: Jane, lname: Doe }
+
+
+    - name: Copy multiple files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      loop:
+        - { src: files/a.txt, dest: /home/ubuntu/a.ini }
+        - { src: files/b.txt, dest: /home/ubuntu/b.conf }
+        - { src: files/c.txt, dest: /home/ubuntu/c.ini }
+
+
+
+
