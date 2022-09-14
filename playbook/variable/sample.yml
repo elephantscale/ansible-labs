@@ -12,7 +12,7 @@
       default: admin
 
     - name: password
-      prompt: Enter the password for %u:
+      prompt: Enter the password:
       default: password
       private: true
 
@@ -30,6 +30,14 @@
     - name: Print Some variables
       debug:
         msg: "Hello, {{ trivera_tech }}"
+
+    - name: Print Some variables
+      debug:
+        msg: "Hello, {{ username }}"
+
+    - name: Print Some variables
+      debug:
+        msg: "Hello, {{ password }}"
 
     - name: Remove "{{ pkgname }}"
       apt:
