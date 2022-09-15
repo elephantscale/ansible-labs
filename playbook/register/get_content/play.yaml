@@ -1,0 +1,26 @@
+---
+
+- hosts: webserver
+  gather_facts: no
+
+
+
+  tasks:
+
+    - name: get content of a file
+      shell: cat /home/ubuntu/a.txt
+      register: file_contents
+
+    - name: print result
+      debug:
+        var: file_contents.stdout
+
+
+    - name: push template
+      template:
+        src: test.html.jn2
+        dest: /home/ubuntu/test.html
+
+
+
+
