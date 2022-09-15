@@ -1,0 +1,24 @@
+---
+
+- hosts: webserver
+  become: yes
+  become_user: root
+
+  tasks:
+
+    - debug:
+        var: ansible_facts.distribution
+
+
+    - name: Install apache2 on ubuntu
+      apt:
+        name: apache2
+      when: ansible_facts.distribution == "Ubuntu"
+
+    - name: Install apache on Centos
+      yum:
+        name: httpd
+      when: ansible_facts.distribution == "CentOS"
+      #when: ansible_facts.distribution is search("centos")
+
+      
