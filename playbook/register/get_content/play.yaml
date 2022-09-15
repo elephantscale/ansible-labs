@@ -3,24 +3,36 @@
 - hosts: webserver
   gather_facts: no
 
+  vars_prompt:
+    
+    - name: input_file_content
+      prompt: Enter the files content
+      private: no
 
+  vars:
+    file_dest: "/home/ubuntu/file.txt"
 
   tasks:
 
+    - name: create the file
+      copy:
+        dest: "{{ file_dest }}" 
+        content: "{{ input_file_content }}"
+
     - name: get content of a file
-      shell: cat /home/ubuntu/a.txt
+      shell: "cat {{ file_dest }}"
       register: file_contents
 
     - name: print result
       debug:
         var: file_contents.stdout
 
-
     - name: push template
       template:
         src: test.html.jn2
         dest: /home/ubuntu/test.html
 
-
-
-
+    - name: cleanup
+      file:
+        dest: "{{ file_dest }}"
+        state: absent
