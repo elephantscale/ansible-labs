@@ -1,0 +1,32 @@
+---
+
+- hosts: all
+  name: A simple play
+  gather_facts: no
+
+  vars_prompt:
+
+    - name: firstName
+      prompt: Enter Your First Name
+      private: no
+      default: John
+
+    - name: lastName
+      prompt: Enter lastName
+      private: no
+      default: Doe
+
+  vars:
+    
+    yourAge: 18
+
+
+  tasks:
+
+    - name: Print values
+      debug:
+        msg: "Hello {{ firstName }} {{ lastName }} you are  {{ yourAge }} years old"
+
+
+
+
