@@ -1,0 +1,7 @@
+database_username = {{ dbUsername }}
+database_password = {{ dbPassword }}
+
+
+
+
+
