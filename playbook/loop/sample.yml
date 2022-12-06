@@ -2,18 +2,9 @@
 
 - hosts: webserver
   become: yes
-  become_user: root
   name: Install Package and print a list
 
   tasks:
-    - name: Install packages with loop
-      with_items:
-        - htop
-        - git
-      apt:
-        name: "{{ item }}"
-        state: present
-        update_cache: yes
 
     - name: Print a list
       debug:
