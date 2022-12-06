@@ -1,0 +1,43 @@
+---
+
+- name: A conditional play
+  hosts: all
+  gather_facts: no
+
+  vars:
+
+    epic: true
+
+    boomer: no # no = false = 0  , yes = true = 1
+
+    distro: "Ubuntu"
+
+  tasks:
+
+    - name: Block A
+      when: epic
+      block:
+
+        - name: Task A
+          debug:
+            msg: "Hello A"
+          
+        - name: Task B
+          debug:
+            msg: "Hello B"
+          
+       
+
+    - name: Block B
+      when: epic or distro == "Ubuntu" 
+      block:
+
+        - name: Task C
+          debug:
+            msg: "Hello C"
+          
+
+        - name: Task D
+          debug:
+            msg: "Hello D"
+          
