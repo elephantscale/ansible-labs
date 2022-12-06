@@ -1,0 +1,52 @@
+---
+
+- name: Update App to v2
+  hosts: webservers
+  gather_facts: no
+
+  vars:
+
+    remote_config_file_location: "/home/ubuntu/config.conf"
+
+    local_config_file_location: "files/a.txt.v2"
+
+  tasks:
+
+
+    - ignore_errors: yes
+      block:
+
+        - name: Make back up of config file
+          copy:
+            remote_src: yes
+            src: "{{ remote_config_file_location }}"
+            dest: "{{ remote_config_file_location }}.bak"
+
+
+    - name: Delete Config
+      file:
+        dest: "{{ remote_config_file_location }}"
+        state: absent
+
+
+
+    - name: Block Update
+      block:
+
+        - name: Copy File
+          copy:
+            src: "{{ local_config_file_location }}"
+            dest: "{{ remote_config_file_location }}"
+
+      rescue:
+
+        - name: Restore backup
+          copy:
+            remote_src: yes
+            dest: "{{ remote_config_file_location }}"
+            src: "{{ remote_config_file_location }}.bak"        
+
+
+
+
+        
