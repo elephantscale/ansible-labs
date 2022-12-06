@@ -26,12 +26,12 @@ In the labs term `C&C` means `Control Center`
 * [Setup inventory](setup/Configure-Inventory.md)
 
 
-### Modules
+### AdHoc
 
-* [Ping Hosts](modules/Module-Ping.md)
-* [Facts](modules/Module-Facts.md)
-* [File/folder manipulations](modules/Module-File.md)
-* [APT](modules/Module-apt.md)
+* [Ping Hosts](adhoc/ping.md)
+* [Facts](adhoc/facts.md)
+* [File/folder manipulations](adhoc/file.md)
+* [APT](adhoc/apt.md)
 
 ### Jinja2
 

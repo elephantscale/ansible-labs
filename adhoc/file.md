@@ -25,7 +25,7 @@ Optional arguments:
 default template looks like:
 
 ```bash
-$ ansible <Host-Group> -m file -a "src=<FULL-PATH> dest=<Host-FULL-PATH>"
+$ ansible <Pattern> -m file -a "src=<FULL-PATH> dest=<Host-FULL-PATH>"
 ```
 
 ## Step 2 — Copy a file
@@ -33,11 +33,11 @@ $ ansible <Host-Group> -m file -a "src=<FULL-PATH> dest=<Host-FULL-PATH>"
 Run the following command to create a file on `C&C`
 
 ```bash
-$ cd ~
+cd ~
 #Create file
-$  touch hello.txt
+touch hello.txt
 #Edit the file
-$ nano hello.txt 
+nano hello.txt 
 ```
 
 Write `Hello World` to `hello.txt` and save the file
@@ -45,7 +45,7 @@ Write `Hello World` to `hello.txt` and save the file
 Now, to copy the file to our `webserver` group,
 
 ```bash
-$ ansible webserver -m copy -a "src=~/hello.txt dest=~"
+$ ansible <Pattern> -m copy -a "src=~/hello.txt dest=~"
 ```
 
 output
@@ -68,23 +68,6 @@ output
     "state": "file",
     "uid": 1000
 }
-<IP 2> | CHANGED => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": true,
-    "checksum": "22596363b3de40b06f981fb85d82312e8c0ed511",
-    "dest": "/home/ubuntu/hello.txt",
-    "gid": 1000,
-    "group": "ubuntu",
-    "md5sum": "6f5902ac237024bdd0c176cb93063dc4",
-    "mode": "0664",
-    "owner": "ubuntu",
-    "size": 12,
-    "src": "/home/ubuntu/.ansible/tmp/ansible-tmp-1632300992.229054-251911723793302/source",
-    "state": "file",
-    "uid": 1000
-}
 ```
 
 Note the status:
@@ -104,7 +87,7 @@ Login to each host and verify that the file is there.
 to delete a file on your hosts use the following command.
 
 ```bash
-$ ansible webserver -m file -a "dest=~/hello.txt state=absent"
+$ ansible <Pattern> -m file -a "dest=~/hello.txt state=absent"
 ```
 
 **NOTE:**
@@ -116,14 +99,6 @@ output
 
 ```console
 <IP 1> | CHANGED => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": true,
-    "path": "/home/ubuntu/hello.txt",
-    "state": "absent"
-}
-<IP 2> | CHANGED => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
     },

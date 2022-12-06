@@ -21,7 +21,7 @@ In this lab, You will learn how to install, update and remove packages on your h
 default template looks like:
 
 ```bash
-$ ansible <Host-Group> -m file apt -a "name=<Package> state=<state>"
+ansible <Pattern> -m apt -a "name=<Package> state=<state>"
 ```
 
 ## Step 2 - Install Apache
@@ -29,7 +29,13 @@ $ ansible <Host-Group> -m file apt -a "name=<Package> state=<state>"
 run the following command to install apache on your hosts, we'll use `appserver`
 
 ```bash
-$ ansible appserver -m apt -a "name=apache2 state=present" -b
+ansible <Pattern> -m apt -a "name=apache2 state=present" -b
+```
+
+sample:
+
+```bash
+ansible webserver -m apt -a "name=apache2 state=present" -b
 ```
 
 Output will be long, look out for `CHANGED`
@@ -43,7 +49,7 @@ Login to each host and verify that `apache2` is installed
 Command to verify:
 
 ```bash
-$ apache2 -v
+apache2 -v
 ```
 
 output
@@ -53,22 +59,19 @@ Server version: Apache/2.4.41 (Ubuntu)
 Server built:   2021-07-05T07:16:56
 ```
 
+_Note:_ Dates may vary
+
 ## Step 2 — remove the package
 
 To remove the installed package on your hosts:
 
 ```bash
-$ ansible appserver -m apt -a "name=apache2 state=absent autoremove=yes" -b
+ansible <Pattern> -m apt -a "name=apache2 state=absent autoremove=yes" -b
 ```
 
 What is `autoremove`?
+
 If yes, remove unused dependency packages for all module states except.
 
-
-## Step 3 — Modules repository
-
-You can find a list of all module at the following link:
-
-https://docs.ansible.com/ansible/latest/collections/community/general/index.html
 
 ## Well done! 👏

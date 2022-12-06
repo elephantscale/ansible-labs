@@ -10,70 +10,40 @@ Basically, We are going to use a module called `setup`
 
 25 minutes
 
-## Step 1 - Requirements
-
-In our labs, are hosts are using password for authentication.
-
-Ansible needs another application called `sshpass` to connect to hosts.
-
-Run the following command only on your control center
-
-```bash
-$ sudo apt-get install -y sshpass
-```
-
-To confirm that `sshpass` is installed use the following command:
-
-```bash
-$ sshpass -V
-```
-
-Output will look like:
-
-```console
-sshpass 1.06
-(C) 2006-2011 Lingnu Open Source Consulting Ltd.
-(C) 2015-2016 Shachar Shemesh
-This program is free software, and can be distributed under the terms of the GPL
-See the COPYING file for more information.
-
-Using "assword" as the default password prompt indicator.
-```
-
-## Step 2 — getting to know the Module `setup`
+## Step 1 — getting to know the Module `setup`
 
 `setup` module is used to pull config data from hosts
 
 default template looks like:
 
 ```bash
-$ ansible <Host-Group> -m setup
+ansible <Pattern> -m setup
 ```
 
 **NOTE:** result of this module will be a lengthy JSON string.
 
-## Step 3 - Running a sample
+## Step 2 - Running a sample
 
 run the following command to see the results
 
 ```bash
-$ ansible webserver -m setup
+ansible <Pattern> -m setup
 ```
 
 Output will be long
 
-## Step 4 — Filter Gathered Facts
+## Step 3 — Filter Gathered Facts
 
 To filter the received data from this module use the following template.
 
 ```bash
-ansible <Host-Group> -m setup -a "filter=<Your-needs>"
+ansible <Pattern> -m setup -a "filter=<Your-needs>"
 ```
 
 sample:
 
 ```bash
-ansible webserver  -m setup -a "filter=ansible_distribution*"
+ansible webserver -m setup -a "filter=ansible_distribution*"
 ```
 
 output
@@ -116,7 +86,7 @@ Practice:
 **Hint:**
 
 ```bash
-$ ansible webserver  -m setup -a "filter=ansible_date_time*"
+ansible webserver -m setup -a "filter=ansible_date_time*"
 ```
 
 ## Well done! 👏
