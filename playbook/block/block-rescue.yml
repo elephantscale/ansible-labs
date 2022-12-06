@@ -1,25 +1,55 @@
 ---
 
-- hosts: appservers
-  become: yes
-  become_user: root
-  gather_facts: yes
+- name: A conditional play
+  hosts: all
+  gather_facts: no
+
+  vars:
+
+    epic: true
+
+    boomer: no # no = false = 0  , yes = true = 1
+
+    distro: "Ubuntu"
 
   tasks:
-    - name: Handle the error
+
+    - name: Block A
+      when: epic
+      #ignore_errors: yes
       block:
-        - name: Print a message
-          debug:
-            msg: 'I execute normally'
 
-        - name: Force a failure
-          command: /bin/false
-
-        - name: Never print this
+        - name: Task A
           debug:
-            msg: 'I never execute, due to the above task failing, :-('
+            msg: "Hello A"
+          
+        - name: Fail Task
+          fail:
+            msg: "This is a failure" 
 
-      rescue:
-        - name: Print when errors
+        - name: Task B
           debug:
-            msg: 'I caught an error, can do stuff here to fix it, :-)'
+            msg: "Hello B"
+
+      rescue: # if failure in main block then: 
+
+        - name: Task R A
+          debug:
+            msg: "This can be anything"
+
+      
+       
+
+    - name: Block B
+      when: epic or distro == "Ubuntu" 
+      block:
+
+        - name: Task C
+          debug:
+            msg: "Hello C"
+          
+
+        - name: Task D
+          debug:
+            msg: "Hello D"
+          
