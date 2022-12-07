@@ -1,0 +1,11 @@
+Hello User,
+
+Welcome to {{ ansible_hostname }}
+
+This is the message of the day for you.
+
+compiled on: {{ ansible_date_time.iso8601 }}
+
+-----------
+
+{{ david_api_booomer.json.fact }}

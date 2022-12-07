@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  name: Create MOTD
+  gather_facts: yes
+  
+  vars:
+    firstName: "John"
+
+  tasks:
+
+    - name: vars includer!
+      include_vars: david_v_booomers.yaml
+
+    - name: Get API content
+      uri:
+        url: "{{ api_url }}"
+        return_content: yes
+        body_format: json
+      register: david_api_booomer
+
+    - debug:
+        msg: "{{ david_api_booomer.json.fact }}"
+
+    - name: Push template
+      become: yes
+      become_user: root
+      template:
+        src: motd.jn2
+        dest: "{{ motd_dest_path }}"
+
+    - name: Send Notif to admin
+      mail:
+        host: "{{ smtp_host }}"
+        port: "{{ smtp_port }}"
+        username: "{{ smtp_username }}"
+        password: "{{ smtp_password }}"
+        
+        sender: postmaster@skilla.dev
+        to: mehrtash.fm@gmail.com
+        subject: Ansible Update
+        body: "{{  lookup('template','mail_body.html.j2')  }}"
+        subtype: "html"
+
+
+    
