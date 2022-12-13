@@ -1,0 +1,32 @@
+---
+
+- name: EX
+  hosts: all
+  gather_facts: no
+
+  vars_prompt:
+
+    - name: distro
+      prompt: Please enter dirsto (a/b)
+      private: no
+      default: a
+
+  tasks:
+
+    - name: Main Block
+      block:
+
+        - name: Copy a file
+          ansible.builtin.include_tasks:
+            file: "{{ distro }}.yaml"
+
+      rescue:
+
+        - name: Print error
+          debug:
+            msg: "File Not Found"
+
+
+
+
+

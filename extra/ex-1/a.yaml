@@ -1,0 +1,4 @@
+- name: Copy A
+  copy: 
+    src: a.txt
+    dest: /home/ubuntu/aa.txt
