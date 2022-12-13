@@ -1,0 +1,41 @@
+---
+
+
+- hosts: all
+  gather_facts: no
+  #become: yes
+  #become_user: root
+
+  tasks:
+
+    - name: Tasks with root access
+      become: yes
+      become_user: root
+      block:
+
+        - name: Update apt
+          apt:
+            update_cache: yes
+
+        - name: Install apache
+          notify:
+            - success_msg
+            - success_msg_2
+          apt:
+            name:
+              - apache2
+              - git
+            state: latest
+
+
+  handlers:
+
+    - name: success_msg
+      debug:
+        msg: "Packages are done!"
+
+    - name: success_msg_2
+      debug:
+        msg: "We're don!"
+
+      
