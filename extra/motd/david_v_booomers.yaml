@@ -1,6 +1,0 @@
-api_url: "https://catfact.ninja/fact"
-motd_dest_path: "/etc/motd"
-smtp_host: "smtp.eu.mailgun.org"
-smtp_port: 587
-smtp_username: "postmaster@skilla.dev"
-smtp_password: "cf7ee924292ec79085aa87ef4ce00375-bdb2c8b4-c532190c"
