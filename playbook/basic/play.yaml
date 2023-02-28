@@ -9,3 +9,7 @@
     - name: Print something
       debug:
         msg: "Hello World"
+    
+    - name: Print something else
+      debug:
+        msg: "Good bye"
