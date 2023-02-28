@@ -1,20 +1,7 @@
 ---
 
 - hosts: webserver
-  become: yes
-  become_user: root
   gather_facts: no
-
-  vars_prompt:
-
-    - name: username
-      prompt: Enter username:
-      default: admin
-
-    - name: password
-      prompt: Enter the password:
-      default: password
-      private: true
 
   vars:
     pkgname: nginx
@@ -22,10 +9,6 @@
 
 
   tasks:
-    - name: Install "{{ pkgname }}"
-      apt:
-        name: "{{ pkgname }}"
-        state: present
 
     - name: Print Some variables
       debug:
@@ -33,14 +16,8 @@
 
     - name: Print Some variables
       debug:
-        msg: "Hello, {{ username }}"
+        msg: "Hello, {{ pkgname }}"
 
     - name: Print Some variables
       debug:
-        msg: "Hello, {{ password }}"
-
-    - name: Remove "{{ pkgname }}"
-      apt:
-        name: "{{ pkgname }}"
-        state: absent
-        autoremove: yes
+        msg: "{{ trivera_tech }}, {{ password }}"
