@@ -5,20 +5,20 @@
   gather_facts: no
 
   vars:
-    pkgname: nginx
-    trivera_tech: Andy
+    name: Jonh
+    family: Doe
 
 
   tasks:
 
     - name: Print Some variables
       debug:
-        msg: "Hello, {{ trivera_tech }}"
+        msg: "Hello, {{ name }}"
 
     - name: Print Some variables
       debug:
-        msg: "Hello, {{ pkgname }}"
+        msg: "Hello, {{ family }}"
 
     - name: Print Some variables
       debug:
-        msg: "{{ trivera_tech }}, {{ password }}"
+        msg: "{{ name }}, {{ family }}"
