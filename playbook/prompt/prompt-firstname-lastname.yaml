@@ -1,7 +1,7 @@
 ---
 
 - hosts: all
-  name: A simple play
+  name: A simple play with prompt
   gather_facts: no
 
   vars_prompt:
