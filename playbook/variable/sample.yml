@@ -1,6 +1,7 @@
 ---
 
-- hosts: webserver
+- hosts: webservers
+  name: A play with variables
   gather_facts: no
 
   vars:
