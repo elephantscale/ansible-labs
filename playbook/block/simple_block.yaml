@@ -3,11 +3,15 @@
 - hosts: webserver
   gather_facts: no
 
+  vars:
+    epic: true
+
   tasks:
 
 
     - name: Block A
       ignore_errors: yes
+      when: epic
       block:
 
         - name: Print Message A
