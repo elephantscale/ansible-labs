@@ -1,0 +1,56 @@
+---
+
+- hosts: webservers
+  name: A playbook with template engine
+  gather_facts: no
+
+
+  vars_prompt:
+
+    - name: version
+      prompt: Select (admin/user)
+      default: user
+      private: no
+
+  pre_tasks:
+
+
+    - name: Version validation
+      assert:
+        that:
+          - version == 'admin' or version == 'user'
+        success_msg: "You passed!"
+        fail_msg: "Invalid selection"
+        quiet: true
+
+    #- name: check version
+    #  fail:
+     #   msg: "Invalid selection"
+     # when: 
+     #   - not version == 'admin'
+     #   - not version == 'user'
+
+
+
+
+  tasks:
+
+
+
+
+    - name: Load the proper variable file
+      include_vars: 
+        file: vars.yaml
+      when: version == 'admin'
+
+    - name: Load the proper variable file
+      include_vars: 
+        file: vars_user.yaml
+      when: version == 'user'
+
+
+    - name: A task to create my config file
+      template:
+        src: config.ini.jn2
+        dest: /home/ubuntu/config.ini
+        backup: yes

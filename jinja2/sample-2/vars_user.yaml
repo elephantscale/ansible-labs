@@ -1,0 +1,5 @@
+db_username: user
+db_password: hello
+trusted:
+  - 0.0.0.0/24
+  

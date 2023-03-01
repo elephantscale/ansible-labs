@@ -1,0 +1,14 @@
+DB_USERNAME = {{ db_username }}
+DB_PASSWORD = {{ db_password }}
+
+TRUESTD_IP = [ 
+
+{% for ip in trusted %}
+
+{{ ip }},
+
+{% endfor %}
+
+
+]
+

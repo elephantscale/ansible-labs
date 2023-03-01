@@ -1,0 +1,6 @@
+db_username: admin
+db_password: myS3cureP@ssw0rd
+trusted:
+  - 10.10.10.1/32
+  - 10.10.10.5/32
+  - 10.10.50.1/32
