@@ -2,6 +2,9 @@
 
 Make sure you're in the `wordpress` directory.
 
+## Inventory
+
+In this example, we're assuming you have a single Ubuntu machine with a public IP address. You can use the `hosts` file to specify the IP address of your target machine.
 
 ## Install Dependencies
 
