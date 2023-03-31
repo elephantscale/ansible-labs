@@ -1,2 +1,0 @@
-[webserver]
-w1.internal.local ansible_ssh_pass=i-0efbe92a671b8a767
