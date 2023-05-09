@@ -13,8 +13,7 @@
 
 
   vars:
-    epic: true   #false or true
-    #question: "yes"  # 0 = no = fasle  | 1 = yes = true
+    epic: true
     distro: "Ubuntu"
 
   tasks:
@@ -29,7 +28,7 @@
       debug: 
         msg: "Task 1"
 
-    - name: "print if epic is false"
+    - name: "print if question is false"
       when: not question | bool  or epic
       debug:
         msg: "Task 2"
