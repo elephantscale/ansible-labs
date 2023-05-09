@@ -1,0 +1,14 @@
+- debug:
+    msg: "{{ file }}"
+
+- name: create dir
+  file:
+    dest: "{{ file.item_dest_path }}"
+    state: directory
+  
+
+- name: copy files
+  copy:
+    src: "{{ file.item_src }}"
+    dest: "{{ file.item_dest_path }}/{{ file.item_dest_file }}"
+
