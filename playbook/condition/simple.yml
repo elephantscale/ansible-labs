@@ -6,10 +6,8 @@
 
   vars_prompt:
 
-    - name: question
-      prompt: enter a value (yes/no)
-      private: no
-      default: yes
+    # TODO: Prompt for a value for question variable (Student task)
+
 
 
   vars:
