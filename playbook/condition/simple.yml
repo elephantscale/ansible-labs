@@ -6,7 +6,7 @@
 
   vars_prompt:
 
-    # TODO: Prompt for a value for question variable (Student task)
+    # TODO: Prompt for a value for question variable,it should be yes/no (Student task)
 
 
 
