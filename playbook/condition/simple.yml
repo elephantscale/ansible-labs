@@ -14,12 +14,12 @@
 
   vars:
     epic: true   #false or true
-
-    #question: "yes"  # 0 = no = fasle  | 1 = yes = true   
-
+    #question: "yes"  # 0 = no = fasle  | 1 = yes = true
     distro: "Ubuntu"
 
   tasks:
+
+    #TODO: Add validation for question variable (Student task)
 
     - name: "Print if epic is true"
       when: 
