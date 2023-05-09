@@ -20,7 +20,7 @@
 
     #TODO: Add validation for question variable (Student task)
 
-    - name: "Print if epic is true"
+    - name: "Print if question is true"
       when: 
         - question | bool  
         - distro == "Ubuntu"
