@@ -1,0 +1,45 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Debian tasks
+      block:
+        - name: Create a user 'student'
+          # HINT: Use the user module
+
+        - name: Set password for 'student'
+          # HINT: Use the user module and openssl_password lookup
+
+        - name: Update all Debian packages
+          # HINT: Use the apt module
+
+        - name: Install Debian packages
+          # HINT: Use the apt module
+
+      rescue:
+        - name: Error handler
+          debug:
+            msg: "An error occurred during the execution of the Debian block."
+
+      when: # HINT: Conditional for Debian OS
+
+    - name: RedHat tasks
+      block:
+        - name: Create a user 'student'
+          # HINT: Use the user module
+
+        - name: Set password for 'student'
+          # HINT: Use the user module and openssl_password lookup
+
+        - name: Update all RedHat packages
+          # HINT: Use the yum module
+
+        - name: Install RedHat packages
+          # HINT: Use the yum module
+
+      rescue:
+        - name: Error handler
+          debug:
+            msg: "An error occurred during the execution of the RedHat block."
+
+      when: # HINT: Conditional for RedHat OS
