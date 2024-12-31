@@ -1,0 +1,30 @@
+---
+
+- hosts: webserver
+  name: Install Apache2 with Handlers
+  become: yes
+  become_user: root
+  gather_facts: no
+
+  tasks:
+
+    - name: update package
+      apt:
+        update_cache: yes
+
+    - name: Install Package
+      apt:
+        name: apache2
+      notify:
+        - sucs_msg
+        - sucs_msg_b
+
+  handlers:
+
+    - name: sucs_msg
+      debug:
+        msg: Package has been Installed
+
+    - name: sucs_msg_b
+      debug:
+        msg: Package has been Installed B

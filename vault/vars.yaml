@@ -1,0 +1,5 @@
+db_user: "roger"
+db_ssh_pass: "cisco"
+db_network_os: "ios"
+username: "roger"
+password: "cisco"

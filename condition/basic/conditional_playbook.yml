@@ -1,0 +1,15 @@
+---
+
+- name: A conditional play
+  hosts: all
+  gather_facts: no
+
+  vars:
+    epic: true
+
+  tasks:
+
+    - name: Task A
+      debug:
+        msg: "Hello A"
+      when: epic

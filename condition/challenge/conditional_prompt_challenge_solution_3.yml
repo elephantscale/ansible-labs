@@ -1,0 +1,32 @@
+---
+- name: Conditional play with Assert validation
+  gather_facts: no
+  hosts: webservers
+
+  vars_prompt:
+    - name: "question"
+      prompt: "Please answer with yes/no"
+      private: no
+      validate: "'yes' in answer or 'no' in answer"
+
+  vars:
+    epic: true
+    distro: "Ubuntu"
+
+  tasks:
+    - name: Assert that 'question' is either 'yes' or 'no'
+      assert:
+        that:
+          - question == "yes" or question == "no"
+        fail_msg: "You must answer with either 'yes' or 'no'"
+        success_msg: "Valid answer provided. Proceeding..."
+
+    - name: "Print if question is true and distro is Ubuntu"
+      debug:
+        msg: "Task 1"
+      when: question | bool and distro == "Ubuntu"
+
+    - name: "Print if question is false or epic is true"
+      debug:
+        msg: "Task 2"
+      when: not question | bool or epic

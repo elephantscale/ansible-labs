@@ -1,0 +1,35 @@
+---
+
+- hosts: appservers
+  become: yes
+  become_user: root
+  gather_facts: yes
+
+  tasks:
+    - name: Attempt and graceful roll back demo
+      block:
+        - name: Print a message
+          debug:
+            msg: 'I execute normally'
+
+        - name: Force a failure
+          command: /bin/false
+
+        - name: Never print this
+          debug:
+            msg: 'I never execute, due to the above task failing, :-('
+      rescue:
+        - name: Print when errors
+          debug:
+            msg: 'I caught an error'
+
+        - name: Force a failure in middle of recovery! >:-)
+          command: /bin/false
+
+        - name: Never print this
+          debug:
+            msg: 'I also never execute :-('
+      always:
+        - name: Always do this
+          debug:
+            msg: "This always executes"

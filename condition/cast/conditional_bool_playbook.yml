@@ -1,0 +1,15 @@
+---
+
+- name: A conditional play
+  hosts: all
+  gather_facts: no
+
+  vars:
+    boomer: no # no = false = 0  , yes = true = 1
+
+  tasks:
+
+    - name: Task A
+      debug:
+        msg: "Hello A"
+      when: boomer | bool # if boomer is true, then run this task

@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  name: Items play
+  gather_facts: no
+
+  tasks:
+
+    - name: Print a List of names
+      loop_control: 
+        loop_var: networkInfo
+      debug:
+        msg: "Hello {{ networkInfo.ip }} can be anything {{ networkInfo.gateway }} "      
+      loop:
+        - { ip: "10.10.10.2", gateway: "10.10.10.1" }
+        - { ip: "10.10.11.2", gateway: "10.10.11.1" }
+        - { ip: "10.10.12.2", gateway: "10.10.12.1" }

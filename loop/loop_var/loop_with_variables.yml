@@ -1,0 +1,16 @@
+---
+- hosts: all
+  name: Loop over external variables
+  gather_facts: no
+
+  vars:
+    user_list:
+      - Alice
+      - Bob
+      - Charlie
+
+  tasks:
+    - name: Greeting each user
+      debug:
+        msg: "Hello, {{ item }}"
+      loop: "{{ user_list }}"

@@ -1,0 +1,15 @@
+---
+
+- name: A play with register
+  hosts: webservers
+  gather_facts: no
+
+  tasks:
+
+    - name: Register a variable
+      shell: cat /home/ubuntu/a.txt
+      register: motd_contents
+
+    - name: print the variable
+      debug:
+        msg: "{{ motd_contents.stdout }}"

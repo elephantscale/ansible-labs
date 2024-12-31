@@ -1,0 +1,27 @@
+---
+
+- name: Conditional play
+  gather_facts: no 
+  hosts: webservers
+
+  vars_prompt:
+    # TODO: Prompt for a value for question variable,it should be yes/no (Student task)
+
+  vars:
+    epic: true
+    distro: "Ubuntu"
+
+  tasks:
+
+    #TODO: Add validation for question variable (Student task)
+
+    - name: "Print if question is true and distro is Ubuntu" #TODO: (Student task)
+      when:  #?
+
+      debug: 
+        msg: "Task 1"
+
+    - name: "print if question is false or epic is true" #TODO: (Student task)
+      when: #?
+      debug:
+        msg: "Task 2"

@@ -1,0 +1,16 @@
+---
+
+- hosts: webservers
+  name: Play with vault
+  gather_facts: false
+
+  tasks:
+
+    - name: Load variables
+      include_vars: vars.yml
+
+    - debug:
+        msg: "Hello, {{ username }}"
+
+    - debug:
+        msg: "Password is {{ password }}"

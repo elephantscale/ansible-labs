@@ -1,0 +1,20 @@
+---
+
+- name: A play with custom variables (facts)
+  hosts: webservers
+  gather_facts: no
+
+  tasks:
+    - name: Setting host facts using set_fact module
+      set_fact:
+        fact_one: "Hello"
+        fact_other: "Bye"
+        john_fact: "Doe"
+
+    - name: Print the value of john_fact
+      debug:
+        var: john_fact
+
+    - name: Print the value of fact_other
+      debug:
+        var: fact_other

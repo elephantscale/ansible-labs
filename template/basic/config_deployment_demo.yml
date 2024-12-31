@@ -1,0 +1,19 @@
+---
+
+- hosts: webservers
+  gather_facts: no
+  name: "Playbook to send config file to servers"
+
+
+  vars:
+
+    dbUsername: root
+    dbPassword: mySecurePassword
+
+
+  tasks:
+
+    - name: Send Config to servers
+      template:
+        src: config.ini.jn2
+        dest: ~/config.ini

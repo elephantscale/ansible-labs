@@ -1,0 +1,16 @@
+---
+
+- hosts: webserver
+  become: yes
+  name: Install Package and print a list
+
+  tasks:
+
+    - name: Print a list
+      debug:
+        msg: "Hello, {{ item }}"
+      with_items:
+        - John
+        - Jane
+        - Alex
+        - sarah

@@ -1,0 +1,22 @@
+---
+- name: Demonstrate Assert with User Input
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+    - name: "user_number"
+      prompt: "Please enter a number between 1 and 10"
+      private: no
+
+  tasks:
+    - name: Assert that the number is between 1 and 10
+      assert:
+        that:
+          - user_number | int >= 1
+          - user_number | int <= 10
+        fail_msg: "The entered number is not between 1 and 10"
+        success_msg: "The entered number is valid. Proceeding..."
+
+    - name: Display a success message
+      debug:
+        msg: "You've successfully entered a valid number. Thank you!"

@@ -1,0 +1,28 @@
+---
+- name: Conditional play
+  gather_facts: no
+  hosts: webservers
+
+  vars_prompt:
+    - name: "question"
+      prompt: "Enter your choice (yes/no)"
+      private: no
+
+  vars:
+    epic: true
+    distro: "Ubuntu"
+
+  tasks:
+
+    - name: "Print if question is true (i.e., 'yes') and distro is Ubuntu"
+      debug:
+        msg: "Task 1"
+      when:
+        - question | bool
+        - distro == "Ubuntu"
+
+    - name: "Print if question is false (i.e., 'no') or epic is true"
+      debug:
+        msg: "Task 2"
+      when:
+        - not question | bool or epic

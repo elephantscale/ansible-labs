@@ -1,0 +1,20 @@
+---
+
+- name: Loop Play
+  hosts: all
+  gather_facts: no
+
+  vars:
+
+    filesInfo:
+      - { item_src: "a.txt", item_dest_path: "/home/ubuntu/farshid", item_dest_file: "a.ini" }
+      - { item_src: "b.txt", item_dest_path: "/home/ubuntu/sam", item_dest_file: "b.ini" }
+      - { item_src: "c.txt", item_dest_path: "/home/ubuntu/tim", item_dest_file: "c.ini" }
+
+  tasks:
+    - name: include external tasks with loop
+      include_tasks:
+        file: ch_task.yaml
+      loop: "{{ filesInfo }}"
+      loop_control:
+        loop_var: file

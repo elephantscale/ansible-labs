@@ -1,0 +1,23 @@
+---
+
+- hosts: webservers
+  name: A play with variables
+  gather_facts: no
+
+  vars:
+    first_name: Jonh
+    family: Doe
+
+  tasks:
+
+    - name: Print Some variables
+      debug:
+        var: first_name
+
+    - name: Print Some variables
+      debug:
+        msg: "Hello, {{ family }}"
+
+    - name: Print Some variables
+      debug:
+        msg: "{{ first_name }}, {{ family }}"
