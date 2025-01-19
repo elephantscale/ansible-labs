@@ -49,7 +49,7 @@ ansible webservers -m setup -a "filter=<Your-Desired-Info>"
 For example, to find out about the operating system of your hosts, you can run:
 
 ```bash
-ansible webserver -m setup -a "filter=ansible_distribution*"
+ansible webservers -m setup -a "filter=ansible_distribution*"
 ```
 
 ### Expected Output:
