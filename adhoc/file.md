@@ -16,7 +16,7 @@ In this lab, you will learn how to create, copy, and delete files and folders on
 
 The `file` module in Ansible is used to manipulate files and folders on your hosts. This module requires several arguments:
 
-- **`src`**: The source path of your file/folder on the Control Node (C&C).
+- **`src`**: The source path of your file/folder on the ansible machine (C&C).
 - **`dest`**: The destination path where the file/folder will be placed on your hosts.
 - **`owner`**: The owner user on the hosts (optional).
 - **`group`**: The owner group on the hosts (optional).
@@ -33,7 +33,7 @@ ansible <Pattern> -m file -a "src=<FULL-PATH> dest=<Host-FULL-PATH> state=<absen
 
 ## Step 2: Copying a File
 
-1. Create a file on the Control Node:
+1. Create a file on the ansible machine:
 
     ```bash
     cd ~
@@ -69,7 +69,7 @@ After running this command, log in to each host and verify that the file is dele
 
 ## Step 4: Creating a Directory
 
-1. Create a directory and a file within it on the Control Node:
+1. Create a directory and a file within it on the ansible machine:
 
     ```bash
     cd ~

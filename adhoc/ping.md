@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this lab, you will learn how to confirm the connection between your control node and hosts.
+In this lab, you will learn how to confirm the connection between your ansible machine and hosts.
 
 We will use the `ping` module for this purpose.
 

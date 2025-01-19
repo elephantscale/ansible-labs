@@ -1,136 +1,165 @@
-# Secure Data with Ansible Vault
+# Lab: Secure Data with Ansible Vault
 
-## Duration
+## Overview
 
-45 minutes
+In this lab, you will master the art of securing sensitive data using Ansible Vault, ensuring that critical information like passwords remains confidential and protected from unauthorized access.
 
-## Objective
+---
 
-In this hands-on lab, you will master the art of securing sensitive data using Ansible Vault, ensuring that critical information like passwords remains confidential.
+## Objectives
 
-## Prerequisites:
+- Learn to create and manage encrypted files using Ansible Vault.
+- Understand how to use encrypted variables in playbooks.
+- Explore different methods for providing Vault passwords during playbook execution.
+- Practice decrypting files securely.
+
+---
+
+## Prerequisites
 
 - Ansible installed on your machine.
 - A target host or set of hosts configured in your Ansible inventory under the group `webservers`.
 
-## Step-by-step guide:
+---
 
-### Step 1: Initiate a Vault-secured File
+## Duration
 
-To start, let's create an encrypted file. This can be a brand-new file created during the vaulting process or an existing file that needs encryption. Let's delve into the former first:
+**Estimated Time:** 45 minutes
 
-Run the following command:
+---
 
-```bash
-$ ansible-vault create test-vault.yml
-```
+## Instructions
 
-Here, we've conceived a new file named `test-vault.yml`.
+### Step 1: Create a Vault-Secured File
 
-After entering some crucial data, save it.
+1. To create a new encrypted file, use the following command:
 
-On inspecting the file:
+   ```bash
+   ansible-vault create test-vault.yml
+   ```
 
-```bash
-$ cat test.yml
-```
+   - This command creates a new file named `test-vault.yml` and prompts you to set a Vault password.
+   - Add sensitive data to the file and save it.
 
-You'll notice its content has undergone encryption.
+2. Verify the encryption by viewing the file:
 
-To peek inside, execute:
+   ```bash
+   cat test-vault.yml
+   ```
 
-```bash
-$ ansible-vault view test-vault.yml
-```
+   - The content will be encrypted and unreadable.
 
-You'll be asked for a password, post which the file's original content will be displayed.
+3. To view the original content, use:
 
-### Step 2: Encrypting Pre-existing Files
+   ```bash
+   ansible-vault view test-vault.yml
+   ```
 
-Imagine having a file, `vars.yml`, already brimming with passwords and sensitive information:
+   - Enter the Vault password to decrypt and display the file content.
 
-```text
-db_user: "roger"
-db_ssh_pass: "cisco"
-db_network_os: "ios" 
-```
+---
 
-Now, let's encrypt this existing trove:
+### Step 2: Encrypt an Existing File
 
-```bash
-$ ansible-vault encrypt vars.yml
-```
+1. If you have a file named `vars.yml` with sensitive information:
 
-On being prompted, provide a password. Voilà! The file's cloaked.
+   ```yaml
+   db_user: "admin"
+   db_password: "securepassword"
+   ```
 
-To double-check, view the file:
+2. Encrypt the file using the following command:
 
-```bash
-$ cat vars.yml
-```
+   ```bash
+   ansible-vault encrypt vars.yml
+   ```
 
-The gibberish you see confirms encryption.
+   - Set a Vault password when prompted.
 
-### Step 3: Integrating Ansible Vault within a Playbook
+3. Verify the encryption:
 
-Time to draft a playbook, `play.yml`, which requires data from `vars.yml`.
+   ```bash
+   cat vars.yml
+   ```
 
-On firing up the playbook:
+   - The content will now appear as encrypted text.
 
-```text
-Error: Attempting to decrypt but no vault secrets found
-```
+---
 
-Oops! The hitch? `vars.yml` is encrypted and demands a password. Ansible's in the dark here.
+### Step 3: Use Vault in a Playbook
 
-There are multiple solutions:
+1. Create a playbook named `secure_playbook.yml` to use encrypted variables:
 
-- Provide the password when prompted during the playbook's execution.
-- During playbook execution, indicate the path to a password file.
-- In `ansible.cfg`, denote the password file's path.
+   ```yaml
+   ---
+   - name: Use Vault in a playbook
+     hosts: webservers
+     vars_files:
+       - vars.yml
+     tasks:
+       - name: Display database credentials
+         debug:
+           msg: "Database user: {{ db_user }} and password: {{ db_password }}"
+   ```
 
-Let's explore these:
+2. Run the playbook and provide the Vault password when prompted:
 
-#### Option 1: Live Password Prompt during Playbook Execution
+   ```bash
+   ansible-playbook secure_playbook.yml --ask-vault-pass
+   ```
 
-Append `--ask-vault-pass` to your playbook command:
+   - This method securely decrypts and uses the variables in the playbook.
 
-```bash
-$ ansible-playbook play.yml --ask-vault-pass 
-```
+---
 
-#### Option 2: Referencing a Password File
+### Step 4: Provide Vault Password Automatically
 
-You might prefer storing your password in a distinct file. Remember, this file's confidentiality is paramount; secure it using machine-specific permissions and refrain from Git-pushing it.
+1. Save the Vault password in a secure file named `vault-pass.txt`:
 
-To guide Ansible towards it, utilize:
+   ```
+   echo 'your_vault_password' > vault-pass.txt
+   chmod 600 vault-pass.txt
+   ```
 
-```bash
-$ ansible-playbook play.yml --vault-password-file vault-pass.txt
-```
+2. Use the `--vault-password-file` option to provide the password during playbook execution:
 
-#### Option 3: Directing Ansible via `ansible.cfg`
+   ```bash
+   ansible-playbook secure_playbook.yml --vault-password-file vault-pass.txt
+   ```
 
-Within `ansible.cfg`, indicate the password file's location:
+3. Alternatively, configure the Vault password file in `ansible.cfg`:
 
-```text
-vault_password_file = vault-pass.txt
-```
+   ```ini
+   [defaults]
+   vault_password_file = vault-pass.txt
+   ```
 
-#### Step 4: Unmasking Encrypted Files
+   - This eliminates the need to specify the password file in the command.
 
-If encryption's no longer desired, decrypt with ease:
+---
 
-```bash
-$ ansible-vault decrypt <filename> 
-```
-## Final File
+### Step 5: Decrypt a File
 
-You can compare your playbook with the [play.yaml](play.yaml) file in the current directory.
+1. To remove encryption from a file, use the following command:
 
-You can compare your variables with the [vars.yaml](vars.yaml) file in the current directory.
+   ```bash
+   ansible-vault decrypt vars.yml
+   ```
 
+   - Enter the Vault password to decrypt the file.
 
-## Summary
+---
 
-You've successfully navigated the intricacies of Ansible Vault, ensuring your data's security. Keep vaulting!
+## Solution Files
+
+You can compare your playbook with the following files in the current directory:
+
+- [secure_playbook.yml](secure_playbook.yml)
+- [vars.yml](vars.yml)
+
+---
+
+## Conclusion
+
+This lab demonstrated how to use Ansible Vault to secure sensitive data effectively. By encrypting variables and files, you can ensure critical information remains confidential while maintaining flexibility in your automation workflows. Mastering Vault is essential for creating secure and robust playbooks. 👏
+

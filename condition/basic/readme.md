@@ -16,7 +16,7 @@ In this lab, you will learn how to use conditionals in an Ansible playbook. Spec
 ## Prerequisites
 
 - Basic understanding of Ansible playbooks.
-- Ansible installed on your control node.
+- Ansible installed on your ansible machine.
 - Access to target hosts in your inventory.
 
 ---

@@ -35,6 +35,7 @@ Ubuntu 22.04 LTS workstation with Ansible installed.
 - [Register Variable](variable/register/readme.md)
 - [Set Fact](variable/set_fact/readme.md)
 - [Get Facts](extra/cpu_count/readme.md)
+- [Include Tasks](extra/include_tasks/readme.md)
 
 ### 4. Condition
 
@@ -74,6 +75,6 @@ Ubuntu 22.04 LTS workstation with Ansible installed.
 ### Extra
 
 - [Log per host](extra/log_per_host/readme.md)
-- [Fact cache](extra/fact_cache/readme.md)1
-- [Include Tasks](extra/include_tasks/readme.md)
+- [Fact cache](extra/fact_cache/readme.md)
+
 

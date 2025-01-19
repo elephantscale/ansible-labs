@@ -17,7 +17,7 @@ In this beginner-friendly lab, you will learn how to use Ansible to gather facts
 ## Prerequisites
 
 - Basic understanding of YAML syntax.
-- Ansible installed on your control node.
+- Ansible installed on your ansible machine.
 - Access to one or more hosts configured for management with Ansible.
 
 ---
@@ -32,7 +32,7 @@ In this beginner-friendly lab, you will learn how to use Ansible to gather facts
 
 ### Step 1: Create Your Playbook
 
-1. On your control node, open a text editor and create a new file named `cpu_count_playbook.yml`.
+1. On your ansible machine, open a text editor and create a new file named `cpu_count_playbook.yml`.
 
 2. Start defining your playbook with the following content:
 

@@ -1,75 +1,118 @@
-# Deploying a Configuration File using Templates in Ansible
+# Lab: Deploying a Configuration File using Templates in Ansible
 
-## Duration
-
-Approximately 20 minutes
-
-## Objective
+## Overview
 
 In this lab, participants will familiarize themselves with how Ansible uses the `template` module to deploy configuration files on servers. The lab emphasizes the importance of separating configuration data from tasks, allowing for dynamic content generation.
 
-## Prerequisites:
+---
+
+## Objectives
+
+- Learn to use the `template` module for configuration file deployment.
+- Understand how to use Jinja2 templates for dynamic value substitution.
+- Create reusable playbooks for consistent configurations.
+
+---
+
+## Prerequisites
 
 - Ansible installed on the participant's machine.
 - A basic understanding of Ansible playbooks and templates.
 - A target host or set of hosts categorized as `webservers` in your Ansible inventory.
 - A template file named `config.ini.jn2` in your working directory.
 
-## Step-by-step guide:
+---
 
-### Step A: Setting up the Playbook
+## Duration
 
-- Create a new playbook named `config_deployment_demo.yml`.
+**Estimated Time:** 20 minutes
 
-### Step B: Define Play Variables
+---
 
-- In your playbook, define the necessary database configurations under the `vars` section:
+## Instructions
 
-```yaml
-vars:
-  dbUsername: root
-  dbPassword: mySecurePassword
-```
+### Step 1: Set Up the Playbook
 
-### Step C: Template Configuration
+1. Create a new playbook named `config_deployment_demo.yml`.
 
-- Ensure you have the template file `config.ini.jn2` with the following content:
+2. Define the play structure:
 
-```
-db_username = {{ dbUsername }}
-db_pass = {{ dbPassword }}
-```
+   ```yaml
+   ---
+   - name: Deploy Configuration Files Using Templates
+     hosts: webservers
+     gather_facts: no
+   ```
 
-This template uses Jinja2 syntax to embed the values of `dbUsername` and `dbPassword` into the configuration file.
+---
 
-### Step D: Deploy the Configuration
+### Step 2: Define Play Variables
 
-- In your playbook, create a task to deploy the configuration using the `template` module:
+1. Add variables for database configuration under the `vars` section:
 
-```yaml
-- name: Send Config to servers
-  template:
-    src: config.ini.jn2
-    dest: ~/config.ini
-```
+   ```yaml
+     vars:
+       dbUsername: root
+       dbPassword: mySecurePassword
+   ```
 
-This task will replace the placeholders in the `config.ini.jn2` file with the actual values defined in the `vars` section and deploy it to the target servers.
+---
 
-### Step E: Running the Playbook
+### Step 3: Create the Template File
 
-- Save the `config_deployment_demo.yml` file.
-- Execute the playbook:
+1. Ensure you have a template file named `config.ini.jn2` in your working directory.
 
-```bash
-ansible-playbook config_deployment_demo.yml
-```
+2. Add the following content to the template file:
 
-Monitor the output to ensure that the configuration is successfully sent to the servers.
+   ```ini
+   db_username = {{ dbUsername }}
+   db_pass = {{ dbPassword }}
+   ```
 
-## Final File
+   **Explanation:**
+   - `{{ dbUsername }}` and `{{ dbPassword }}` use Jinja2 syntax to dynamically substitute values from the playbook variables.
+
+---
+
+### Step 4: Deploy the Configuration File
+
+1. Add a task to deploy the configuration file using the `template` module:
+
+   ```yaml
+     tasks:
+       - name: Deploy the configuration file
+         template:
+           src: config.ini.jn2
+           dest: ~/config.ini
+   ```
+
+   **Explanation:**
+   - `src`: Specifies the source template file.
+   - `dest`: Specifies the destination path on the target server.
+
+---
+
+### Step 5: Execute the Playbook
+
+1. Save the `config_deployment_demo.yml` file.
+
+2. Run the playbook using the following command:
+
+   ```bash
+   ansible-playbook config_deployment_demo.yml
+   ```
+
+3. Observe the output to ensure the configuration file is successfully deployed to the target servers.
+
+---
+
+## Solution File
 
 You can compare your playbook with the [config_deployment_demo.yml](config_deployment_demo.yml) file in the current directory.
 
-## Summary
+---
 
-This lab allowed participants to understand the power of Ansible templates in deploying configuration files. Utilizing templates in this manner ensures consistent configurations across environments while allowing for dynamic value substitutions.
+## Conclusion
+
+This lab demonstrated how to use Ansible's `template` module to deploy dynamic configuration files. By utilizing templates, you can maintain consistent configurations across environments while allowing for dynamic substitutions. Mastering this technique is essential for creating scalable and adaptable automation workflows. 👏
+

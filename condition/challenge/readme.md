@@ -17,7 +17,7 @@ This challenge will test your ability to use conditionals, variable prompts, and
 ## Prerequisites
 
 - Basic knowledge of Ansible playbooks.
-- Ansible installed on your control node.
+- Ansible installed on your ansible machine.
 - Access to target hosts categorized as "webservers."
 
 ---

@@ -17,7 +17,7 @@ In this lab, you will deepen your understanding of using advanced conditionals i
 ## Prerequisites
 
 - Basic understanding of Ansible playbooks.
-- Ansible installed on your control node.
+- Ansible installed on your ansible machine.
 - Access to target hosts in your inventory.
 
 ---
