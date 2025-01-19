@@ -1,82 +1,118 @@
-# Using the Assert Module with Input in Ansible
+# Lab: Using the Assert Module with Input in Ansible
+
+## Overview
+
+In this lab, you will learn how to use the `assert` module in Ansible to validate user input. By prompting the user for input and asserting conditions against the provided values, you can ensure your playbooks are interactive and error-proof.
+
+---
+
+## Objectives
+
+- Learn how to use the `assert` module to validate input.
+- Prompt for user input using `vars_prompt`.
+- Ensure playbook tasks execute only when valid inputs are provided.
+
+---
+
+## Prerequisites
+
+- Basic understanding of Ansible playbooks.
+- Ansible installed on your ansible machine.
+
+---
 
 ## Duration
 
-Approximately 20 minutes
+**Estimated Time:** 20 minutes
 
-## Objective
-
-In this lab, you'll delve deeper into the `assert` module, learning to validate user input. By prompting the user for input and then asserting against the provided value, you'll ensure your playbooks remain both interactive and foolproof.
-
-## Prerequisites:
-
-- A foundational knowledge of Ansible.
-- Ansible installed on your machine.
-
-## Step-by-step guide:
-
-### Step A: Setting up the Playbook
-
-- Start by creating a new playbook named `assert_input_example.yml` with the basic structure:
-
-```yaml
 ---
-- name: Demonstrate Assert with User Input
-  hosts: localhost
-  gather_facts: no
-```
 
-### Step B: Prompt for User Input
+## Instructions
 
-- Add a `vars_prompt` section to gather a number from the user:
+### Step 1: Set Up the Ansible Playbook
 
-```yaml
-  vars_prompt:
-    - name: "user_number"
-      prompt: "Please enter a number between 1 and 10"
-      private: no
-```
+1. Create a new YAML file named `assert_input_example.yml`.
 
-### Step C: Assert the User Input
+2. Define the play's name, target hosts (`localhost` in this case), and whether to gather facts:
 
-- Use the `assert` module to ensure that the number entered by the user is within the specified range:
+   ```yaml
+   ---
+   - name: Demonstrate Assert with User Input
+     hosts: localhost
+     gather_facts: no
+   ```
 
-```yaml
-  tasks:
-    - name: Assert that the number is between 1 and 10
-      assert:
-        that:
-          - user_number | int >= 1
-          - user_number | int <= 10
-        fail_msg: "The entered number is not between 1 and 10"
-        success_msg: "The entered number is valid. Proceeding..."
-```
+---
 
-### Step D: Display a Success Message
+### Step 2: Prompt for User Input
 
-- For demonstration purposes, add a debug task to show a success message:
+1. Add a `vars_prompt` section to collect a number from the user:
 
-```yaml
-    - name: Display a success message
-      debug:
-        msg: "You've successfully entered a valid number. Thank you!"
-```
+   ```yaml
+     vars_prompt:
+       - name: "user_number"
+         prompt: "Please enter a number between 1 and 10"
+         private: no
+   ```
 
-### Step E: Execute the Playbook
+   **Explanation:**
+   - `vars_prompt` prompts the user for input when the playbook is executed.
+   - The input is stored in the `user_number` variable.
 
-- Save the `assert_input_example.yml` file.
-- Run the playbook:
+---
 
-```bash
-ansible-playbook assert_input_example.yml
-```
+### Step 3: Assert the User Input
 
-- Follow the on-screen prompt and enter a number. If you provide a number outside the range 1-10, the playbook will halt with an assertion failure message.
+1. Add a task to validate that the number entered by the user is within the range 1 to 10:
 
-## Final File
+   ```yaml
+     tasks:
+       - name: Assert that the number is between 1 and 10
+         assert:
+           that:
+             - user_number | int >= 1
+             - user_number | int <= 10
+           fail_msg: "The entered number is not between 1 and 10"
+           success_msg: "The entered number is valid. Proceeding..."
+   ```
 
-You can compare your playbook with the [assert_input_example.yml](assert_input_example.yml) file in the current directory.
+   **Explanation:**
+   - The `assert` module validates conditions defined in the `that` list.
+   - If the conditions fail, the playbook halts and displays the `fail_msg`.
+   - If the conditions pass, the `success_msg` is shown.
 
-## Summary
+---
 
-Utilizing the `assert` module with user input in Ansible allows for dynamic playbooks that can validate and react according to provided values. This approach ensures playbooks remain adaptive, interactive, and resilient to undesired inputs. Armed with this knowledge, you can now build even more interactive and foolproof playbooks.
+### Step 4: Display a Success Message
+
+1. Add a task to display a message confirming successful input validation:
+
+   ```yaml
+       - name: Display a success message
+         debug:
+           msg: "You've successfully entered a valid number. Thank you!"
+   ```
+
+   **Explanation:**
+   - The `debug` module displays a custom success message if the input passes validation.
+
+---
+
+### Step 5: Execute the Playbook
+
+1. Save the `assert_input_example.yml` file.
+
+2. Run the playbook using the following command:
+
+   ```bash
+   ansible-playbook assert_input_example.yml
+   ```
+
+3. Follow the prompt to enter a number. If the number is outside the range 1-10, the playbook will halt with an assertion failure message.
+
+---
+
+## Conclusion
+
+In this lab, you've learned how to use the `assert` module in Ansible to validate user input dynamically. This approach ensures your playbooks remain interactive, adaptable, and resilient to incorrect inputs. By incorporating input validation, you can create more reliable and user-friendly playbooks. Keep experimenting to further enhance your automation workflows! 👏
+

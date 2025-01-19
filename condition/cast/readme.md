@@ -1,70 +1,99 @@
-# Lab Title Here
+# Lab: Using Boolean Filters in Ansible Playbooks
 
-**Using Conditionals with Boolean Filters in Ansible Playbook**
+## Overview
+
+In this lab, you will learn how to use boolean filters in Ansible playbooks. Specifically, you will understand how the `| bool` filter can evaluate human-friendly variable values like "yes" or "no" into boolean `true` or `false`, and use them to control task execution.
+
+---
+
+## Objectives
+
+- Learn how to use the `| bool` filter to evaluate variables.
+- Create tasks that execute conditionally based on boolean filters.
+
+---
+
+## Prerequisites
+
+- Basic understanding of Ansible playbooks.
+- Ansible installed on your ansible machine.
+- Access to target hosts in your inventory.
+
+---
 
 ## Duration
 
-Approximately 20 minutes
+**Estimated Time:** 20 minutes
 
-## Objective
+---
 
-The focus of this lab is to understand how to use conditionals with boolean filters in an Ansible playbook. You will see how to leverage the `| bool` filter to evaluate variables that are expressed in a more human-friendly manner, like "yes" or "no", and then determine the execution of tasks based
-on the boolean value.
+## Instructions
 
-## Prerequisites:
+### Step 1: Set Up the Ansible Playbook
 
-- Basic understanding of Ansible.
-- Ansible installed on your machine.
-- Access to target hosts in your inventory.
+1. Create a new YAML file named `conditional_bool_playbook.yml`.
 
-## Step-by-step guide:
+2. Define the play's name, target hosts (`all` in this case), and whether to gather facts:
 
-### Step A: Set up the Ansible Playbook
+   ```yaml
+   ---
+   - name: A conditional play with boolean filters
+     hosts: all
+     gather_facts: no
+   ```
 
-- Create a new YAML file named `conditional_bool_playbook.yml`.
-- Begin by defining the play's name, the target hosts (`all` in this context), and opting out of gathering facts.
+   **Explanation:**
+   - `hosts: all` targets all hosts in the inventory.
+   - `gather_facts: no` skips automatic fact gathering for simplicity.
 
-```yaml
-- name: A conditional play
-  hosts: all
-  gather_facts: no
-```
+---
 
-### Step B: Define the Variable
+### Step 2: Define a Variable
 
-- Under the `vars` section, set up a variable named `boomer`. Here, the value "no" equates to `false`, and conversely, "yes" would equate to `true`.
+1. In the `vars` section, define a variable named `boomer` and assign it the value `no`:
 
-```yaml
-  vars:
-    boomer: no # no = false = 0  , yes = true = 1
-```
+   ```yaml
+     vars:
+       boomer: no # "no" translates to false, "yes" translates to true
+   ```
 
-### Step C: Add a Conditional Task
+   **Explanation:**
+   - The variable `boomer` is a human-readable string that will be evaluated as a boolean.
 
-4. Introduce a task named "Task A". This task will display the message "Hello A". The task's execution is governed by the truthiness of the `boomer` variable, which is evaluated using the `| bool` filter.
+---
 
-```yaml
-  tasks:
-    - name: Task A
-      debug:
-        msg: "Hello A"
-      when: boomer | bool # if boomer is true, then run this task
-```
+### Step 3: Add a Conditional Task
 
-### Step D: Run the Playbook
+1. Under the `tasks` section, add a task that prints a message "Hello A" if the `boomer` variable evaluates to `true`:
 
-- Store your changes to the `conditional_bool_playbook.yml` file.
-- To execute the playbook, type:
+   ```yaml
+     tasks:
+       - name: Task A
+         debug:
+           msg: "Hello A"
+         when: boomer | bool
+   ```
 
-```
-ansible-playbook conditional_bool_playbook.yml
-```
+   **Explanation:**
+   - The `when: boomer | bool` clause ensures the task runs only if `boomer` evaluates to `true` (e.g., "yes").
 
-## Final File
+---
 
-You can compare the playbook you created with the [conditional_bool_playbook.yml](conditional_bool_playbook.yml) file in the present directory.
+### Step 4: Execute the Playbook
 
-## Summary
+1. Save the `conditional_bool_playbook.yml` file.
 
-Through this lab, you've been introduced to the concept of boolean filters in Ansible. With the `| bool` filter, Ansible enables you to evaluate more human-centric values like "yes" or "no" as true or false. This provides flexibility and clarity in your playbooks, ensuring tasks run under the
-desired conditions.
+2. Run the playbook using the following command:
+
+   ```bash
+   ansible-playbook conditional_bool_playbook.yml
+   ```
+
+3. Observe the output. The task "Task A" will execute only if `boomer` evaluates to `true`.
+
+---
+
+## Conclusion
+
+In this lab, you've learned how to use boolean filters in Ansible playbooks to evaluate variables like "yes" or "no" into boolean values. By leveraging the `| bool` filter, you can make your playbooks more adaptable and intuitive. Experiment with other human-friendly values and conditions to further enhance your automation skills! 👏
+

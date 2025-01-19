@@ -1,98 +1,133 @@
-# Using Advanced Conditionals in Ansible Playbook
+# Lab: Using Advanced Conditionals in Ansible Playbooks
+
+## Overview
+
+In this lab, you will deepen your understanding of using advanced conditionals in Ansible playbooks. You will learn to combine multiple conditions with logical operators (`and`, `or`, `not`) and use the `| bool` filter to evaluate human-readable variables like "yes" or "no."
+
+---
+
+## Objectives
+
+- Learn how to use advanced conditionals in tasks.
+- Combine multiple conditions with logical operators.
+- Use the `| bool` filter for evaluating variables.
+
+---
+
+## Prerequisites
+
+- Basic understanding of Ansible playbooks.
+- Ansible installed on your control node.
+- Access to target hosts in your inventory.
+
+---
 
 ## Duration
 
-Approximately 20 minutes
+**Estimated Time:** 20 minutes
 
-## Objective
+---
 
-The goal of this lab is to deepen your understanding of using conditionals in Ansible playbooks. We will cover how to use complex conditions, combining multiple conditions using logical operators (`and`, `or`, `not`), and the usage of the `| bool` filter for more human-readable variables.
+## Instructions
 
-## Prerequisites:
+### Step 1: Set Up the Ansible Playbook
 
-- A foundational knowledge of Ansible.
-- Ansible installed on your machine.
-- Access to target hosts in your inventory.
+1. Create a new YAML file named `advanced_conditional_playbook.yml`.
 
-## Step-by-step guide:
+2. Define the play's name, target hosts (`all` in this case), and whether to gather facts:
 
-### Step A: Set Up the Playbook Structure
+   ```yaml
+   ---
+   - name: A conditional play with advanced logic
+     hosts: all
+     gather_facts: no
+   ```
 
-- Create a YAML file named `advanced_conditional_playbook.yml`.
-- Start with:
+   **Explanation:**
+   - `hosts: all` targets all hosts in the inventory.
+   - `gather_facts: no` skips automatic fact gathering for simplicity.
 
-```yaml
-- name: A conditional play
-  hosts: all
-  gather_facts: no
-```
+---
 
-### Step B: Define Variables
+### Step 2: Define Variables
 
-- Under the `vars` section, set up the following variables:
+1. In the `vars` section, define the following variables:
 
-```yaml
-  vars:
-    epic: true
-    boomer: no
-    distro: "Ubuntu"
-```
+   ```yaml
+     vars:
+       epic: true
+       boomer: no
+       distro: "Ubuntu"
+   ```
 
-### Step C: Implement Conditional Tasks
+   **Explanation:**
+   - `epic` is a boolean variable.
+   - `boomer` is a human-readable string evaluated as a boolean using the `| bool` filter.
+   - `distro` specifies the operating system.
 
-- Add the task "Task A":
+---
 
-```yaml
-    - name: Task A
-      debug:
-        msg: "Hello A"
-      when: epic and boomer | bool
-```
+### Step 3: Add Conditional Tasks
 
-- Introduce the task "Task B":
+1. Under the `tasks` section, add the following tasks:
 
-```yaml
-    - name: Task B
-      debug:
-        msg: "Hello B"
-      when:
-        - not epic
-        - not boomer | bool
-```
+   - **Task A**: Executes if both `epic` is true and `boomer` evaluates to true.
 
-- Set up the task "Task C":
+     ```yaml
+       - name: Task A
+         debug:
+           msg: "Hello A"
+         when: epic and boomer | bool
+     ```
 
-```yaml
-    - name: Task C
-      debug:
-        msg: "Hello C"
-      when: epic or distro == "Ubuntu" 
-```
+   - **Task B**: Executes if `epic` is false and `boomer` evaluates to false.
 
-- Lastly, configure the task "Task D":
+     ```yaml
+       - name: Task B
+         debug:
+           msg: "Hello B"
+         when:
+           - not epic
+           - not boomer | bool
+     ```
 
-```yaml
-    - name: Task D
-      debug:
-        msg: "Hello D"
-      when:
-        - epic
-        - boomer | bool or distro == "Ubuntu"
-```
+   - **Task C**: Executes if either `epic` is true or the `distro` is "Ubuntu."
 
-### Step D: Execute the Playbook
+     ```yaml
+       - name: Task C
+         debug:
+           msg: "Hello C"
+         when: epic or distro == "Ubuntu"
+     ```
 
-- Save the `advanced_conditional_playbook.yml` file.
-- Run the playbook:
+   - **Task D**: Executes if `epic` is true and either `boomer` evaluates to true or the `distro` is "Ubuntu."
 
-```
-ansible-playbook advanced_conditional_playbook.yml
-```
+     ```yaml
+       - name: Task D
+         debug:
+           msg: "Hello D"
+         when:
+           - epic
+           - boomer | bool or distro == "Ubuntu"
+     ```
 
-## Final File
+---
 
-You can compare your playbook with the [advanced_conditional_playbook.yml](advanced_conditional_playbook.yml) file in the current directory.
+### Step 4: Execute the Playbook
 
-## Summary
+1. Save the `advanced_conditional_playbook.yml` file.
 
-In this lab, you've delved deeper into the utilization of advanced conditionals in Ansible. By mastering these techniques, you can make your playbooks more dynamic and efficient, allowing for tailored execution based on the environment or system state.
+2. Run the playbook using the following command:
+
+   ```bash
+   ansible-playbook advanced_conditional_playbook.yml
+   ```
+
+3. Observe the output. Each task will execute based on the specified conditions.
+
+---
+
+## Conclusion
+
+In this lab, you've learned how to use advanced conditionals in Ansible playbooks by combining logical operators and boolean filters. These techniques allow you to create dynamic, flexible playbooks that respond intelligently to variable values and system states. Experiment with additional conditions to further refine your skills! 👏
+

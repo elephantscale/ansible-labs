@@ -42,7 +42,7 @@ Ubuntu 22.04 LTS workstation with Ansible installed.
 - [Cast variables](condition/cast/readme.md)
 - [Complex](condition/complex/readme.md)
 - [Assert](condition/assert/readme.md)
-- [Challenge](condition/challenge/readme.md)
+- [**Challenge**](condition/challenge/readme.md)
 
 ### 5. Loops
 

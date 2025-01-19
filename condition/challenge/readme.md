@@ -1,98 +1,136 @@
 # Challenge: Using Conditionals and Variable Prompts in Ansible Playbook
 
+## Overview
+
+This challenge will test your ability to use conditionals, variable prompts, and task execution based on variable values in an Ansible playbook. By constructing a playbook that incorporates these elements, you will enhance your skills in creating dynamic and interactive automation scripts.
+
+---
+
+## Objectives
+
+- Prompt the user for input using `vars_prompt`.
+- Validate and use the input with conditionals.
+- Execute tasks based on logical conditions.
+
+---
+
+## Prerequisites
+
+- Basic knowledge of Ansible playbooks.
+- Ansible installed on your control node.
+- Access to target hosts categorized as "webservers."
+
+---
+
 ## Duration
 
-Approximately 30 minutes
+**Estimated Time:** 30 minutes
 
-## Objective
+---
 
-The purpose of this challenge is to test your understanding of using conditionals, variable prompts, and task execution based on the values of these variables in an Ansible playbook.
+## Instructions
 
-## Prerequisites:
+### Step 1: Set Up the Playbook Structure
 
-- A foundational knowledge of Ansible.
-- Ansible installed on your machine.
-- Access to target hosts in your inventory, particularly those categorized as "webservers."
+1. Create a YAML file named `conditional_prompt_challenge.yml`.
 
-## Step-by-step guide:
+2. Define the play's name, target hosts, and skip fact gathering:
 
-### Step A: Set Up the Playbook Structure
+   ```yaml
+   ---
+   - name: Conditional play
+     hosts: webservers
+     gather_facts: no
+   ```
 
-- Create a YAML file named `conditional_prompt_challenge.yml`.
-- Start with:
+---
 
-```yaml
-- name: Conditional play
-  gather_facts: no
-  hosts: webservers
-```
+### Step 2: Implement Variable Prompt
 
-### Step B: Implement Variable Prompt
+1. Add a `vars_prompt` section to solicit user input for a variable named `question`. The input should be either "yes" or "no":
 
-- Add a `vars_prompt` to solicit user input for a variable called `question`. The input should be either "yes" or "no".
+   ```yaml
+     vars_prompt:
+       - name: "question"
+         prompt: "Please answer 'yes' or 'no'"
+         private: no
+   ```
 
-```yaml
-  vars_prompt:
-  # TODO: Prompt for a value for question variable, it should be yes/no (Student task)
-```
+---
 
-### Step C: Define Static Variables
+### Step 3: Define Static Variables
 
-- Provide the following pre-defined variables:
+1. Add the following pre-defined variables:
 
-```yaml
-  vars:
-    epic: true
-    distro: "Ubuntu"
-```
+   ```yaml
+     vars:
+       epic: true
+       distro: "Ubuntu"
+   ```
 
-### Step D: Add Task Conditionals
+   **Explanation:**
+   - `epic`: A boolean variable.
+   - `distro`: Represents the operating system.
 
-- Add a task to validate that the `question` variable holds a valid value, either "yes" or "no".
+---
 
-```yaml
-    #TODO: Add validation for question variable (Student task)
-```
+### Step 4: Add Conditional Tasks
 
-- Construct the first task. It should only execute if the `question` variable holds the value of "yes" and the `distro` is "Ubuntu":
+1. Add a task to validate that the `question` variable holds a valid value:
 
-```yaml
-    - name: "Print if question is true and distro is Ubuntu" #TODO: (Student task)
-      when: #?
-      debug:
-        msg: "Task 1"
-```
+   ```yaml
+       - name: Validate user input
+         assert:
+           that:
+             - question in ["yes", "no"]
+           fail_msg: "Invalid input. Please enter 'yes' or 'no'."
+   ```
 
-- Implement the second task. This task should be executed if the `question` variable holds the value "no" or if `epic` is true:
+2. Add the first task to execute if `question` is "yes" and `distro` is "Ubuntu":
 
-```yaml
-    - name: "print if question is false or epic is true" #TODO: (Student task)
-      when: #?
-      debug:
-        msg: "Task 2"
-```
+   ```yaml
+       - name: Print message if question is 'yes' and distro is Ubuntu
+         debug:
+           msg: "Condition met: question is 'yes' and distro is Ubuntu."
+         when: question == "yes" and distro == "Ubuntu"
+   ```
 
-### Step E: Test the Playbook
+3. Add the second task to execute if `question` is "no" or `epic` is true:
 
-- Save the `conditional_prompt_challenge.yml` file.
-- Execute the playbook:
+   ```yaml
+       - name: Print message if question is 'no' or epic is true
+         debug:
+           msg: "Condition met: question is 'no' or epic is true."
+         when: question == "no" or epic
+   ```
 
-```
-ansible-playbook conditional_prompt_challenge.yml
-```
+---
 
-## Final File
+### Step 5: Test the Playbook
 
-The Template of the challenge can be found [Here](conditional_prompt_challenge.yml) file in the current directory.
+1. Save the `conditional_prompt_challenge.yml` file.
 
-## Solution
+2. Run the playbook using the following command:
 
-You can compare your solution with either of these files:
+   ```bash
+   ansible-playbook conditional_prompt_challenge.yml
+   ```
+
+3. Provide input when prompted and observe the task execution based on the conditions.
+
+---
+
+## Solution Files
+
+You can compare your solution with the provided examples:
 
 - [Solution 1](conditional_prompt_challenge_solution_1.yml)
 - [Solution 2](conditional_prompt_challenge_solution_2.yml)
 - [Solution with assert](conditional_prompt_challenge_solution_3.yml)
 
-## Summary
+---
 
-Through this challenge, you practiced constructing Ansible playbooks that prompt users for input, validate this input, and then use it, along with other variables, to dictate task execution. It's a crucial skill when creating dynamic and adaptable automation scripts using Ansible.
+## Conclusion
+
+In this challenge, you practiced creating Ansible playbooks that prompt users for input, validate the input, and execute tasks based on logical conditions. Mastering these techniques is essential for creating dynamic and adaptable automation scripts in Ansible. Keep refining your skills to handle more complex scenarios! 👏
+
