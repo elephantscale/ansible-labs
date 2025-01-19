@@ -1,33 +1,40 @@
-# Overview
+# Lab: Ping Hosts
 
-In this lab, You will learn how to confirm the connection between your control center and hosts.
+## Overview
 
-Basically, We are going to use a module called `ping` 
+In this lab, you will learn how to confirm the connection between your control node and hosts.
 
+We will use the `ping` module for this purpose.
+
+---
 
 ## Duration
 
-25 minutes
+**Estimated Time:** 20 minutes
 
-## Step 1 — getting to know the Module `ping`
+---
 
-`ping` module is used to verify connectivity between the control center and hosts.
+## Step 1: Understanding the `ping` Module
 
-default template looks like:
+The `ping` module is used to verify connectivity between Ansible and its hosts.
 
-```bash
-$ ansible <Pattern> -m ping
-```
-
-## Step 2 - Running a sample
-
-Run the following command to see the results
+The default syntax for using the `ping` module is:
 
 ```bash
-$ ansible webserver -m ping
+ansible <Pattern> -m ping
 ```
 
-output
+---
+
+## Step 2: Running a Sample Command
+
+Run the following command to test the connection:
+
+```bash
+ansible webservers -m ping
+```
+
+### Expected Output:
 
 ```console
 <IP 1> | SUCCESS => {
@@ -39,16 +46,16 @@ output
 }
 ```
 
-Note the following part
-```console
-    SUCCESS
-    "changed": false,
-    "ping": "pong"
-```
+### Key Points:
+- **`SUCCESS`**: Indicates that Ansible successfully connected to the hosts.
+- **`changed: false`**: Confirms that no changes were made on the hosts.
+- **`ping: "pong"`**: Confirms connectivity between Ansible and the hosts.
 
-This means
-- Ansible can connect to the hosts
-- Nothing is changed on the hosts
+**Note:** This is not an ICMP ping; it is a test of Ansible's ability to connect to the hosts.
 
+---
 
-## Well done! 👏
+## Well Done! 👏
+
+You have successfully verified connectivity using the `ping` module!
+
