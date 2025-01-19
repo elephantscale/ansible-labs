@@ -1,9 +1,12 @@
-# Lab Instructions: Introduction to Variables in Ansible Playbooks
+# Lab: Introduction to Variables in Ansible Playbooks
 
 ## Overview
 
-In this beginner-friendly lab, you will learn how to use variables in an Ansible playbook. Variables in Ansible are very similar to variables in any programming language. They are used to store values
-that can be used and reused throughout your playbook. This lab will guide you through creating a simple playbook that uses variables.
+In this beginner-friendly lab, you will learn how to use variables in an Ansible playbook. 
+
+Variables in Ansible are very similar to variables in any programming language. They are used to store values that can be used and reused throughout your playbook. This lab will guide you through creating a simple playbook that uses variables.
+
+---
 
 ## Objectives
 
@@ -11,21 +14,27 @@ that can be used and reused throughout your playbook. This lab will guide you th
 - Define and use variables in a playbook.
 - Run the playbook to see how variables affect task execution.
 
+---
+
 ## Prerequisites
 
 - Basic understanding of YAML syntax.
-- Ansible installed on your control node.
+- Ansible installed on your Ansible machine.
 - Access to one or more hosts (like web servers) configured for management with Ansible.
+
+---
 
 ## Duration
 
-30 minutes
+**Estimated Time:** 30 minutes
+
+---
 
 ## Instructions
 
 ### Step 1: Create Your Playbook
 
-1. On your control node, open a text editor and create a new file named `variable_play.yml`.
+1. On your Ansible machine, open a text editor and create a new file named `variable_play.yml`.
 
 2. Add the following content to the file:
 
@@ -53,9 +62,11 @@ that can be used and reused throughout your playbook. This lab will guide you th
             msg: "{{ first_name }}, {{ family }}"
     ```
 
-   Explanation:
+   **Explanation:**
     - `vars`: This section is used to define variables. Here, `first_name` and `family` are the two variables.
     - `tasks`: This section contains tasks that use the `debug` module to print variable values.
+
+---
 
 ### Step 2: Run Your Playbook
 
@@ -69,12 +80,16 @@ that can be used and reused throughout your playbook. This lab will guide you th
 
 3. Observe the output. You should see the values of `first_name` and `family` printed in different formats as specified in the tasks.
 
+---
+
 ### Step 3: Experiment with Variables
 
 - Try changing the values of `first_name` and `family` in the `vars` section and rerun the playbook to see how the output changes.
 - Experiment with adding new variables and using them in tasks.
 
+---
+
 ## Conclusion
 
-Well done! You've completed a basic lab on using variables in Ansible playbooks. Understanding variables is crucial as they allow you to write more dynamic and reusable playbooks. Keep experimenting
-with different types of variables and their applications in your Ansible projects.
+Well done! You've completed a basic lab on using variables in Ansible playbooks. Understanding variables is crucial as they allow you to write more dynamic and reusable playbooks. Keep experimenting with different types of variables and their applications in your Ansible projects. 👏
+
