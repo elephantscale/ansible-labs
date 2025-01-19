@@ -8,7 +8,7 @@ In this lab, you will learn how to install Ansible on your designated machine (`
 
 ## Duration
 
-Approximately 20 minutes.
+**Estimated Time:** 20 minutes
 
 ---
 
@@ -78,6 +78,15 @@ ansible 2.12.7
 ```
 
 **Note:** The version number and Python version may vary depending on your system.
+
+
+## Step 4: Install `nano`
+
+To keep commands as simple as possible, we'll use `nano`
+
+```bash
+$ sudo apt-get install nano -y
+```
 
 ---
 
