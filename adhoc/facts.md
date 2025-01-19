@@ -1,11 +1,16 @@
-# Overview
+# Lab: Gathering Facts with Ansible
 
-In this beginner-friendly lab, you'll learn how to gather information (facts) from your hosts using Ansible. We'll focus on a module called `setup`, which is essential for collecting configuration
-data.
+## Overview
+
+In this beginner-friendly lab, you'll learn how to gather information (facts) from your hosts using Ansible. We'll focus on a module called `setup`, which is essential for collecting configuration data.
+
+---
 
 ## Duration
 
-25 minutes
+**Estimated Time:** 25 minutes
+
+---
 
 ## Step 1: Understanding the `setup` Module
 
@@ -19,22 +24,26 @@ ansible <Pattern> -m setup
 
 **Note:** The output of this command is a detailed JSON string, which contains a lot of information.
 
+---
+
 ## Step 2: Running a Sample Command
 
 Let's see this module in action. Run the following command:
 
 ```bash
-ansible <Pattern> -m setup
+ansible webservers -m setup
 ```
 
 The output will be extensive, showing a lot of details about your host's configuration.
+
+---
 
 ## Step 3: Filtering Gathered Facts
 
 Often, you'll only need specific pieces of information. To narrow down the results, use a filter with your command:
 
 ```bash
-ansible <Pattern> -m setup -a "filter=<Your-Desired-Info>"
+ansible webservers -m setup -a "filter=<Your-Desired-Info>"
 ```
 
 For example, to find out about the operating system of your hosts, you can run:
@@ -43,7 +52,7 @@ For example, to find out about the operating system of your hosts, you can run:
 ansible webserver -m setup -a "filter=ansible_distribution*"
 ```
 
-The output will look something like this:
+### Expected Output:
 
 ```console
 <IP 1> | SUCCESS => {
@@ -59,12 +68,11 @@ The output will look something like this:
     },
     "changed": false
 }
-<IP 2> | SUCCESS => {
-    ...
-}
 ```
 
 This command provides detailed information about the operating system of your hosts.
+
+---
 
 ### Practice Exercise
 
@@ -73,10 +81,12 @@ Try to gather time-related information from your hosts:
 **Hint:**
 
 ```bash
-ansible webserver -m setup -a "filter=ansible_date_time*"
+ansible webservers -m setup -a "filter=ansible_date_time*"
 ```
+
+---
 
 ## Conclusion
 
-Great job! You've learned how to use the `setup` module in Ansible to gather facts about your hosts. This skill is fundamental for managing and automating tasks in your network. Keep practicing to
-become more familiar with Ansible's capabilities. 👏
+Great job! You've learned how to use the `setup` module in Ansible to gather facts about your hosts. This skill is fundamental for managing and automating tasks in your network. Keep practicing to become more familiar with Ansible's capabilities. 👏
+
