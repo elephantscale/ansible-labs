@@ -1,25 +1,33 @@
-# **Using `include_vars` in Ansible - Simple Example Without Conditions**
+# Lab: Using `include_vars` in Ansible
 
-## **Overview**
+## Overview
 
-In this lab, you will learn how to use `include_vars` to include variable files into your playbook. This simple example will show you how to split variables across multiple files and load them using `include_vars`.
+In this lab, you will learn how to use `include_vars` to include variable files into your playbook. This example demonstrates how to split variables across multiple files and load them using `include_vars` for better organization and reusability.
 
-## **Objectives**
+---
+
+## Objectives
 
 - Use `include_vars` to load variables from external files.
 
-## **Prerequisites**
+---
 
-- Ansible installed on your control node.
-- At least one managed host.
+## Prerequisites
 
-## **Duration**
+- Ansible installed on your ansible machine.
+- At least one managed host configured for Ansible.
 
-15 minutes
+---
 
-## **Instructions**
+## Duration
 
-### **Step 1: Create Variable Files**
+**Estimated Time:** 15 minutes
+
+---
+
+## Instructions
+
+### Step 1: Create Variable Files
 
 1. **Create a General Variable File:**
 
@@ -41,7 +49,9 @@ In this lab, you will learn how to use `include_vars` to include variable files 
      db_password: "dev_password"
      ```
 
-### **Step 2: Create the Main Playbook**
+---
+
+### Step 2: Create the Main Playbook
 
 1. Create a playbook file named `include_vars_play.yml` with the following content:
 
@@ -66,7 +76,9 @@ In this lab, you will learn how to use `include_vars` to include variable files 
            msg: "Environment: {{ env }}, DB Host: {{ db_host }}, User: {{ db_user }}"
    ```
 
-### **Step 3: Run the Playbook**
+---
+
+### Step 3: Run the Playbook
 
 1. Save the playbook and variable files.
 
@@ -76,8 +88,11 @@ In this lab, you will learn how to use `include_vars` to include variable files 
    ansible-playbook include_vars_play.yml
    ```
 
-3. The playbook will load variables from both `general_vars.yml` and `env_vars.yml`, and you will see the variable values printed in the debug messages.
+3. Observe the output. The playbook will load variables from both `general_vars.yml` and `env_vars.yml`, and the debug messages will display the variable values.
 
-## **Conclusion**
+---
 
-In this lab, you’ve learned how to use `include_vars` to load variables from multiple files into an Ansible playbook. This technique allows you to organize variables into separate files and load them as needed.
+## Conclusion
+
+In this lab, you’ve learned how to use `include_vars` to load variables from multiple files into an Ansible playbook. This technique allows you to organize variables into separate files and load them as needed, making your playbooks more modular and maintainable. 👏
+

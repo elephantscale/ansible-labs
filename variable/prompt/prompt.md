@@ -1,48 +1,56 @@
-# Lab Instructions: Using Prompts in Ansible Playbooks
+# Lab: Using Prompts in Ansible Playbooks
 
 ## Overview
 
-In this beginner-friendly lab, you will learn how to use prompts in an Ansible playbook. Prompts are a way to ask for input from the user running the playbook. This can be useful for customizing playbook runs without changing the playbook's code.
+In this lab, you will learn how to use prompts in an Ansible playbook. Prompts allow you to request input from the user running the playbook, enabling customization without altering the playbook's code.
+
+---
 
 ## Objectives
 
-- Learn to use `vars_prompt` to gather user input.
-- Combine prompted variables and predefined variables in a task.
-- Run the playbook and provide input through prompts.
+- Understand how to use `vars_prompt` to gather user input.
+- Combine prompted and predefined variables in a task.
+- Run a playbook and provide input through prompts.
+
+---
 
 ## Prerequisites
 
 - Basic understanding of YAML syntax.
-- Ansible installed on your control node.
+- Ansible installed on your Ansible machine.
 - Access to one or more hosts configured for management with Ansible.
+
+---
 
 ## Duration
 
-30 minutes
+**Estimated Time:** 30 minutes
+
+---
 
 ## Instructions
 
 ### Step 1: Create Your Playbook
 
-1. On your control node, open a text editor and create a new file named `prompt_play.yml`.
+1. On your Ansible machine, open a text editor and create a new file named `prompt_play.yml`.
 
 2. Add the following content to the file:
 
     ```yaml
     ---
     - hosts: all
-      name: A simple play with prompt
+      name: A simple play with prompts
       gather_facts: no
 
       vars_prompt:
 
         - name: firstName
-          prompt: Enter Your First Name
+          prompt: Enter your first name
           private: no
           default: John
 
         - name: lastName
-          prompt: Enter lastName
+          prompt: Enter your last name
           private: no
           default: Doe
 
@@ -50,15 +58,17 @@ In this beginner-friendly lab, you will learn how to use prompts in an Ansible p
         yourAge: 18
 
       tasks:
-        - name: Print values
+        - name: Display the input values
           debug:
-            msg: "Hello {{ firstName }} {{ lastName }} you are {{ yourAge }} years old"
+            msg: "Hello {{ firstName }} {{ lastName }}, you are {{ yourAge }} years old."
     ```
 
-    Explanation:
-    - `vars_prompt`: This section is used to define variables that will be prompted to the user when the playbook is run.
-    - `vars`: This section is used to define static variables.
-    - `tasks`: Contains tasks that use the `debug` module to print a message combining prompted and static variables.
+    **Explanation:**
+    - `vars_prompt`: Defines variables to be prompted from the user during playbook execution.
+    - `vars`: Stores predefined static variables.
+    - `tasks`: Executes actions, such as displaying messages that combine prompted and predefined variables.
+
+---
 
 ### Step 2: Run Your Playbook
 
@@ -70,15 +80,20 @@ In this beginner-friendly lab, you will learn how to use prompts in an Ansible p
     ansible-playbook prompt_play.yml
     ```
 
-3. When prompted, enter a first name and last name. You can also press Enter to accept the default values (`John` and `Doe`).
+3. When prompted, enter a first name and last name, or press Enter to accept the default values (`John` and `Doe`).
 
-4. Observe the output. The message will include the names you entered and the predefined age.
+4. Review the output. The message will include the entered names and the predefined age.
+
+---
 
 ### Step 3: Experiment with Prompts
 
-- Try modifying the default values in the `vars_prompt` section and rerun the playbook.
-- Experiment with adding new prompted variables and using them in tasks.
+- Modify the default values in the `vars_prompt` section and rerun the playbook.
+- Add new prompted variables and include them in tasks to explore further functionality.
+
+---
 
 ## Conclusion
 
-Congratulations! You've successfully completed a lab on using prompts in Ansible playbooks. This skill is useful for creating interactive playbooks where user input is required. Keep practicing to become more proficient with Ansible's various features.
+Congratulations! You have successfully completed a lab on using prompts in Ansible playbooks. This technique is essential for creating interactive playbooks that require user input. Keep exploring to become more proficient with Ansible's versatile features. 👏
+
