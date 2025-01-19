@@ -16,8 +16,8 @@ Ubuntu 22.04 LTS workstation with Ansible installed.
 
 ### 1. Installation and Setup
 
-- 1.1 [Setup Ansible Machine](setup/Install-Ansible.md)
-- 1.2 [Setup inventory](setup/Configure-Inventory.md)
+- 1.1 [Install Ansible](setup/Install-Ansible.md)
+- 1.2 [Setup Inventory](setup/Configure-Inventory.md)
 
 ### 2. AdHoc
 
