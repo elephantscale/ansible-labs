@@ -24,7 +24,6 @@ Ubuntu 22.04 LTS workstation with Ansible installed.
 - 2.1 [Ping Hosts](adhoc/ping.md)
 - 2.2 [Facts](adhoc/facts.md)
 - 2.3 [File/folder manipulations](adhoc/file.md)
-- 2.4 [APT](adhoc/apt.md)
 
 ### 3. Variables
 
