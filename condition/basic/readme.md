@@ -1,66 +1,99 @@
-# Using Conditionals in Ansible Playbook
+# Lab Instructions: Using Conditionals in Ansible Playbooks
 
-## Duration
-
-Approximately 20 minutes
-
-## Objective
+## Overview
 
 In this lab, you will learn how to use conditionals in an Ansible playbook. Specifically, you will understand how the `when` clause can be used to control the execution of tasks based on the value of a variable.
 
-## Prerequisites:
+---
 
-- Basic understanding of Ansible.
-- Ansible installed on your machine.
+## Objectives
+
+- Learn how to use the `when` clause to implement conditionals.
+- Create a task that executes only under specific conditions.
+
+---
+
+## Prerequisites
+
+- Basic understanding of Ansible playbooks.
+- Ansible installed on your control node.
 - Access to target hosts in your inventory.
 
-## Step-by-step guide:
+---
 
-### Step A: Set up the Ansible Playbook
+## Duration
 
-- Create a new YAML file named `conditional_playbook.yml`.
-- Specify the play's name, target hosts (`all` in this case), and the decision to avoid gathering facts.
+**Estimated Time:** 20 minutes
 
-```yaml
-- name: A conditional play
-  hosts: all
-  gather_facts: no
-```
+---
 
-### Step B: Define a Variable
+## Instructions
 
-In the `vars` section, define a variable named `epic` and assign it the boolean value `true`.
+### Step 1: Set Up the Ansible Playbook
 
-```yaml
-  vars:
-    epic: true
-```
+1. Create a new YAML file named `conditional_playbook.yml`.
 
-### Step C: Add a Conditional Task
+2. Define the play's name, target hosts (`all` in this case), and whether to gather facts:
 
-Add a task named "Task A" that prints a message "Hello A". This task will only execute if the variable `epic` is set to `true`.
+   ```yaml
+   ---
+   - name: A conditional play
+     hosts: all
+     gather_facts: no
+   ```
 
-```yaml
-  tasks:
-    - name: Task A
-      debug:
-        msg: "Hello A"
-      when: epic 
-```
+   **Explanation:**
+   - `hosts: all` targets all hosts in the inventory.
+   - `gather_facts: no` skips automatic fact gathering to keep the playbook simple.
 
-### Step D: Execute the Playbook
+---
 
-- Save the `conditional_playbook.yml` file.
-- Run the playbook using the following command:
+### Step 2: Define a Variable
 
-```
-ansible-playbook conditional_playbook.yml
-```
+1. In the `vars` section, define a variable named `epic` and assign it a boolean value:
 
-## Final File
+   ```yaml
+     vars:
+       epic: true
+   ```
 
-You can compare your playbook with the [conditional_playbook.yml](conditional_playbook.yml) file in the current directory.
+   **Explanation:**
+   - The variable `epic` will be used to control the execution of tasks.
 
-## Summary
+---
 
-In this lab, you've learned how to utilize conditionals in an Ansible playbook. By leveraging the `when` clause, you can make the execution of specific tasks contingent on certain conditions, thus making your playbooks more dynamic and adaptive.
+### Step 3: Add a Conditional Task
+
+1. Under the `tasks` section, add a task that prints a message "Hello A" if the variable `epic` is `true`:
+
+   ```yaml
+     tasks:
+       - name: Task A
+         debug:
+           msg: "Hello A"
+         when: epic
+   ```
+
+   **Explanation:**
+   - The `when` clause ensures the task runs only when the condition (`epic: true`) is met.
+
+---
+
+### Step 4: Execute the Playbook
+
+1. Save the `conditional_playbook.yml` file.
+
+2. Run the playbook using the following command:
+
+   ```bash
+   ansible-playbook conditional_playbook.yml
+   ```
+
+3. Observe the output. The task "Task A" will execute only if `epic` is set to `true`.
+
+---
+
+## Conclusion
+
+In this lab, you've learned how to use conditionals in an Ansible playbook by leveraging the `when` clause. This powerful feature allows you to control task execution based on specific conditions, making your playbooks more dynamic and adaptive. Keep practicing with different conditions to enhance your automation skills! 👏
+
