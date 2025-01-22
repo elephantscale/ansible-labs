@@ -55,6 +55,25 @@ ansible webservers -m ping
 
 ---
 
+Extra:
+
+to skip ssh key checking, you can add the following line to the ansible configuration file:
+
+```bash
+sudo nano /etc/ansible/ansible.cfg
+```
+
+add this line:
+
+```bash
+[defaults]
+host_key_checking = False
+```
+
+
+
+--- 
+
 ## Well Done! 👏
 
 You have successfully verified connectivity using the `ping` module!
