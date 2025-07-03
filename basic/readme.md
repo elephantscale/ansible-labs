@@ -80,14 +80,78 @@ You'll learn the basics of playbook structure and how to perform simple tasks.
 
 ---
 
-### Step 3: Experiment and Explore
+### Step 3: Enhanced Examples - From Simple to Production
 
-- Try modifying the messages in the `debug` tasks and rerun the playbook to see how the output changes.
-- Experiment with targeting different host groups, if you have them configured.
+#### Simple Example (What you just did)
+The basic debug messages you created above.
+
+#### Intermediate Example - Adding System Information
+Try this enhanced version:
+
+```yaml
+---
+- name: Enhanced First Play
+  hosts: webservers
+  gather_facts: yes
+  
+  tasks:
+    - name: Display welcome message
+      debug:
+        msg: "Welcome to {{ inventory_hostname }}!"
+    
+    - name: Show system information
+      debug:
+        msg: "Running {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+    
+    - name: Display current time
+      debug:
+        var: ansible_date_time.iso8601
+```
+
+#### Production-Ready Example - Web Server Health Check
+For production environments, you might use:
+
+```yaml
+---
+- name: Web Server Health Check
+  hosts: webservers
+  gather_facts: yes
+  
+  tasks:
+    - name: Check if web service is running
+      service_facts:
+    
+    - name: Display web server status
+      debug:
+        msg: "Apache service is {{ ansible_facts.services['apache2.service'].state | default('not found') }}"
+      when: "'apache2.service' in ansible_facts.services"
+    
+    - name: Check disk usage
+      debug:
+        msg: "Disk usage on /: {{ (ansible_facts['mounts'] | selectattr('mount', 'equalto', '/') | list | first)['size_available'] // 1024 // 1024 // 1024 }} GB available"
+    
+    - name: Log health check completion
+      debug:
+        msg: "Health check completed at {{ ansible_date_time.iso8601 }} for {{ inventory_hostname }}"
+```
+
+### Step 4: Try the Examples
+
+1. Save each example as separate files (`enhanced_play.yml`, `health_check.yml`)
+2. Run them and observe the differences in output complexity
+3. Notice how we progress from simple debug messages to actual system monitoring
 
 ---
 
 ## Conclusion
 
-Congratulations! You've successfully created and run your first Ansible playbook. This foundational skill is a stepping stone to more complex Ansible automation tasks. As you become more comfortable with playbooks, you'll be able to automate a wide range of tasks on your managed hosts. 👏
+Congratulations! You've successfully created and run your first Ansible playbook and seen how it can scale from simple tasks to production-ready automation. 
+
+**What you learned:**
+- Basic playbook structure
+- How to progress from simple to complex automation
+- The power of Ansible facts for system information
+- Production patterns for monitoring and health checks
+
+This foundational skill is a stepping stone to more complex Ansible automation tasks. As you become more comfortable with playbooks, you'll be able to automate a wide range of tasks on your managed hosts. 👏
 

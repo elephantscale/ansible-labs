@@ -85,7 +85,9 @@ For the `[webservers]` group, add `[webservers:vars]` after the last host entry:
 
 ### Variables:
 - **`ansible_user`**: The username to use for SSH.
-- **`ansible_ssh_pass`**: The password to use for SSH.
+- **`ansible_ssh_pass`**: The password to use for SSH (for lab purposes only).
+
+**Security Note:** In production environments, always use SSH keys instead of passwords for authentication.
 
 ### Example:
 
@@ -95,9 +97,22 @@ For the `[webservers]` group, add `[webservers:vars]` after the last host entry:
 
 [webservers:vars]
 ansible_user=<Username>  # Example: ubuntu in this lab environment
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-Save the file by pressing `Ctrl+S`, and exit by pressing `Ctrl+X`.
+### Production Alternative (Recommended):
+For production environments, use SSH keys instead:
+
+```console
+[webservers]
+<IP Machine 1>
+
+[webservers:vars]
+ansible_user=<Username>
+ansible_ssh_private_key_file=/path/to/your/private/key
+```
+
+Save the file by pressing `Ctrl+O` (then Enter), and exit by pressing `Ctrl+X`.
 
 ---
 

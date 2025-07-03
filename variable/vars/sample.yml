@@ -5,19 +5,18 @@
   gather_facts: no
 
   vars:
-    first_name: Jonh
+    first_name: John
     family: Doe
 
   tasks:
-
-    - name: Print Some variables
+    - name: Print first name variable
       debug:
         var: first_name
 
-    - name: Print Some variables
+    - name: Print family variable with message
       debug:
         msg: "Hello, {{ family }}"
 
-    - name: Print Some variables
+    - name: Print both variables
       debug:
         msg: "{{ first_name }}, {{ family }}"

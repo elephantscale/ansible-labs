@@ -14,7 +14,7 @@
   tasks:
     - name: include external tasks with loop
       include_tasks:
-        file: ch_task.yaml
+        file: loop_task.yaml
       loop: "{{ filesInfo }}"
       loop_control:
         loop_var: file

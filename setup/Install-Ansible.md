@@ -39,25 +39,25 @@ ansible --version
 1. Update the system packages:
 
 ```bash
-sudo apt-get update
+sudo apt update && sudo apt upgrade -y
 ```
 
 2. Install the required dependencies:
 
 ```bash
-sudo apt-get install software-properties-common
+sudo apt install software-properties-common -y
 ```
 
-3. Add the Ansible repository:
+3. Add the official Ansible PPA repository:
 
 ```bash
-sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo add-apt-repository --yes --update ppa:ansible/ansible
 ```
 
 4. Install Ansible:
 
 ```bash
-sudo apt-get install ansible
+sudo apt install ansible -y
 ```
 
 5. Verify the installation by checking the Ansible version:
@@ -69,15 +69,15 @@ ansible --version
 You should see output similar to the following:
 
 ```console
-ansible 2.12.7
+ansible [core 2.18.1]
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
   executable location = /usr/bin/ansible
-  python version = 3.8.10 (default, Jun  2 2021, 10:49:15) [GCC 9.4.0]
+  python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]
 ```
 
-**Note:** The version number and Python version may vary depending on your system.
+**Note:** The version number and Python version may vary depending on your system. As of 2025, you should see Ansible 8.x+ or 9.x+ versions with ansible-core 2.15+ or higher.
 
 
 ## Step 4: Install `nano`
@@ -85,7 +85,7 @@ ansible 2.12.7
 To keep commands as simple as possible, we'll use `nano`
 
 ```bash
-$ sudo apt-get install nano -y
+sudo apt install nano -y
 ```
 
 ---

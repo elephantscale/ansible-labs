@@ -1,15 +1,19 @@
 ---
 
-- name: A play with register
+- name: Demonstrate register usage with file creation
   hosts: webservers
   gather_facts: no
 
   tasks:
+    - name: Create a test file
+      copy:
+        content: "Sample text for testing."
+        dest: /home/ubuntu/a.txt
 
-    - name: Register a variable
+    - name: Capture file content
       shell: cat /home/ubuntu/a.txt
-      register: motd_contents
+      register: file_content
 
-    - name: print the variable
+    - name: Display file content
       debug:
-        msg: "{{ motd_contents.stdout }}"
+        msg: "{{ file_content.stdout }}"

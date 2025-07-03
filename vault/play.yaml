@@ -7,7 +7,7 @@
   tasks:
 
     - name: Load variables
-      include_vars: vars.yml
+      include_vars: vars.yaml
 
     - debug:
         msg: "Hello, {{ username }}"
