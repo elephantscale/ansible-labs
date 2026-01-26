@@ -96,7 +96,7 @@ For the `[webservers]` group, add `[webservers:vars]` after the last host entry:
 <IP Machine 1>  ansible_ssh_pass=<Machine 1 Password>
 
 [webservers:vars]
-ansible_user=<Username>  # Example: ubuntu in this lab environment
+ansible_user=<Username>  # Example: azureuser in this lab environment
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
